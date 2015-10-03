@@ -74,10 +74,10 @@ The patterns are not based on genes involved in somatic (O) or flagellar (H) bio
 If only Prs is detected, these isolates are often serotype 4a or 4c, though LisSero reports these as "no type (NT)".
 
 ##Bugs
-Please submit via the GitHub issues page: [https://github.com/MDU-PHL/ngmaster/issues](https://github.com/MDU-PHL/ngmaster/issues)  
+Please submit via the GitHub issues page: [https://github.com/MDU-PHL/LisSero/issues](https://github.com/MDU-PHL/LisSero/issues)  
 
 ##Software Licence
-GPLv2: [https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE](https://github.com/MDU-PHL/ngmaster/blob/master/LICENSE)
+GPLv2: [https://github.com/MDU-PHL/LisSero/blob/master/LICENSE](https://github.com/MDU-PHL/LisSero/blob/master/LICENSE)
 
 ## References
 * Doumith et al. Differentiation of the major Listeria monocytogenes serovars by multiplex PCR.
