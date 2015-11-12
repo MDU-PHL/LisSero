@@ -87,40 +87,13 @@ else:
 # Load dictionaries
 ampsize = {16:906, 8:691, 4:471, 2:597, 1:370}		# Dictionary for expected amplicon size
 
+# Load the serotype labels
 serotype = {}
-serotype[0] = "-"
-serotype[1] = "Prs"
-serotype[2] = "ORF2110"
-serotype[3] = "ORF2110,Prs"
-serotype[4] = "ORF2819"
-serotype[5] = "ORF2819,Prs"
-serotype[6] = "ORF2819,ORF2110"
-serotype[7] = "ORF2819,ORF2110,Prs"
-serotype[8] = "lmo0737"
-serotype[9] = "lmo0737,Prs"
-serotype[10] = "lmo0737,ORF2110"
-serotype[11] = "lmo0737,ORF2110,Prs"
-serotype[12] = "lmo0737,ORF2819"
-serotype[13] = "lmo0737,ORF2819,Prs"
-serotype[14] = "lmo0737,ORF2110,ORF2819"
-serotype[15] = "lmo0737,ORF2110,ORF2819,Prs"
-serotype[16] = "lmo1118"
-serotype[17] = "lmo1118,Prs"
-serotype[18] = "lmo1118,ORF2110"
-serotype[19] = "lmo1118,ORF2110,Prs"
-serotype[20] = "lmo1118,ORF2819"
-serotype[21] = "lmo1118,ORF2819,Prs"
-serotype[22] = "lmo1118,ORF2110,ORF2819"
-serotype[23] = "lmo1118,ORF2110,ORF2819,Prs"
-serotype[24] = "lmo1118,lmo0737"
-serotype[25] = "lmo1118,lmo0737,Prs"
-serotype[26] = "lmo1118,lmo0737,ORF2110"
-serotype[27] = "lmo1118,lmo0737,ORF2110,Prs"
-serotype[28] = "lmo1118,lmo0737,ORF2819"
-serotype[29] = "lmo1118,lmo0737,ORF2819,Prs"
-serotype[30] = "lmo1118,lmo0737,ORF2110,ORF2819"
-serotype[31] = "lmo1118,lmo0737,ORF2110,ORF2819,Prs"
-
+serotype_file = os.path.dirname(os.path.realpath(sys.argv[0])) + "/../db/serotypes.tab"
+with open(serotype_file) as f:
+        for line in f:
+                col = line.rstrip('\n').split('\t')
+                serotype[ int(col[0]) ] = col[1]
 
 # Print detailed output from PrimerSearch if --full option set
 if args.ampseq == 0 and args.full:
