@@ -82,7 +82,7 @@ if which('primersearch') == None:
 if args.primers:
 	primers = str(args.primers)
 else:
-	primers = os.path.dirname(os.path.realpath(sys.argv[0])) + "/primers"
+	primers = os.path.dirname(os.path.realpath(sys.argv[0])) + "/../db/primers.tab"
 
 # Load dictionaries
 ampsize = {16:906, 8:691, 4:471, 2:597, 1:370}		# Dictionary for expected amplicon size
