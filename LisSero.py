@@ -88,46 +88,38 @@ else:
 ampsize = {16:906, 8:691, 4:471, 2:597, 1:370}		# Dictionary for expected amplicon size
 
 serotype = {}
-serotype[0] = "ERROR: No amplicons found - check the submitted sequence is L.monocytogenes"
-serotype[1] = "Prs only: Possibly serotype 4a or 4c (Lineage III/IV)"
+serotype[0] = "-"
+serotype[1] = "Prs"
 serotype[2] = "ORF2110"
-serotype[3] = "ORF2110, Prs"
+serotype[3] = "ORF2110,Prs"
 serotype[4] = "ORF2819"
-serotype[5] = "ORF2819, Prs"
-serotype[6] = "ORF2819, ORF2110"
-serotype[7] = "ORF2819, ORF2110, Prs"
+serotype[5] = "ORF2819,Prs"
+serotype[6] = "ORF2819,ORF2110"
+serotype[7] = "ORF2819,ORF2110,Prs"
 serotype[8] = "lmo0737"
-serotype[9] = "lmo0737, Prs"
-serotype[10] = "lmo0737, ORF2110"
-serotype[11] = "lmo0737, ORF2110, Prs"
-serotype[12] = "lmo0737, ORF2819"
-serotype[13] = "lmo0737, ORF2819, Prs"
-serotype[14] = "lmo0737, ORF2110, ORF2819"
-serotype[15] = "lmo0737, ORF2110, ORF2819, Prs"
+serotype[9] = "lmo0737,Prs"
+serotype[10] = "lmo0737,ORF2110"
+serotype[11] = "lmo0737,ORF2110,Prs"
+serotype[12] = "lmo0737,ORF2819"
+serotype[13] = "lmo0737,ORF2819,Prs"
+serotype[14] = "lmo0737,ORF2110,ORF2819"
+serotype[15] = "lmo0737,ORF2110,ORF2819,Prs"
 serotype[16] = "lmo1118"
-serotype[17] = "lmo1118, Prs"
-serotype[18] = "lmo1118, ORF2110"
-serotype[19] = "lmo1118, ORF2110, Prs"
-serotype[20] = "lmo1118, ORF2819"
-serotype[21] = "lmo1118, ORF2819, Prs"
-serotype[22] = "lmo1118, ORF2110, ORF2819"
-serotype[23] = "lmo1118, ORF2110, ORF2819, Prs"
-serotype[24] = "lmo1118, lmo0737"
-serotype[25] = "lmo1118, lmo0737, Prs"
-serotype[26] = "lmo1118, lmo0737, ORF2110"
-serotype[27] = "lmo1118, lmo0737, ORF2110, Prs"
-serotype[28] = "lmo1118, lmo0737, ORF2819"
-serotype[29] = "lmo1118, lmo0737, ORF2819, Prs"
-serotype[30] = "lmo1118, lmo0737, ORF2110, ORF2819"
-serotype[31] = "lmo1118, lmo0737, ORF2110, ORF2819, Prs"
-
-# Load serotype results dictionary - need to fix
-#A = f+'\t'+'1/2a, 3a'+'\t'+c
-#B = f+'\t'+'1/2b, 3b, 7'+'\t'+c
-#C = f+'\t'+'1/2c, 3c'+'\t'+c
-#D = f+'\t'+'4b, 4d, 4e'+'\t'+c
-#NT = f+'\t'+'NT'+'\t'+c
-#results = {2:D, 3:D, 4:B, 5:B, 6:D, 7:D, 8:A, 9:A, 10:D, 11:D, 12:D, 13:D, 14:D, 15:D, 17:C, 18:C, 24:C, 25:C}
+serotype[17] = "lmo1118,Prs"
+serotype[18] = "lmo1118,ORF2110"
+serotype[19] = "lmo1118,ORF2110,Prs"
+serotype[20] = "lmo1118,ORF2819"
+serotype[21] = "lmo1118,ORF2819,Prs"
+serotype[22] = "lmo1118,ORF2110,ORF2819"
+serotype[23] = "lmo1118,ORF2110,ORF2819,Prs"
+serotype[24] = "lmo1118,lmo0737"
+serotype[25] = "lmo1118,lmo0737,Prs"
+serotype[26] = "lmo1118,lmo0737,ORF2110"
+serotype[27] = "lmo1118,lmo0737,ORF2110,Prs"
+serotype[28] = "lmo1118,lmo0737,ORF2819"
+serotype[29] = "lmo1118,lmo0737,ORF2819,Prs"
+serotype[30] = "lmo1118,lmo0737,ORF2110,ORF2819"
+serotype[31] = "lmo1118,lmo0737,ORF2110,ORF2819,Prs"
 
 
 # Print detailed output from PrimerSearch if --full option set
@@ -193,18 +185,19 @@ else:
 		c = serotype[stsum]
 		
 		if (stsum == 4) or (stsum == 5):
-			print f + '\t' + '1/2b, 3b, 7' + '\t' + c
+			print f + '\t' + '1/2b,3b,7' + '\t' + c
 		elif (stsum == 24) or (stsum == 25) or (stsum == 17) or (stsum == 18):
-			print f + '\t' + '1/2c, 3c' + '\t' + c
+			print f + '\t' + '1/2c,3c' + '\t' + c
 		elif (stsum == 8) or (stsum == 9):
-			print f + '\t' + '1/2a, 3a' + '\t' + c
+			print f + '\t' + '1/2a,3a' + '\t' + c
 		elif (stsum == 2) or (stsum == 3) or (stsum == 6) or (stsum == 7):
-			print f + '\t' + '4b, 4d, 4e' + '\t' + c
+			print f + '\t' + '4b,4d,4e' + '\t' + c
 		elif (stsum > 9) and (stsum < 16):
-			print f + '\t' + '4b, 4d, 4e' + '\t' + c
+			print f + '\t' + '4b,4d,4e' + '\t' + c
+		elif stsum == 1:
+			print f + '\t' + '?4a,4c' + '\t' + c
 		else:
-			print f + '\t' + 'NT' + '\t' + c
-
-#		print results[stsum]				# Need to fix results dictionary first
+			print f + '\t' + '-' + '\t' + c
+			sys.stderr.write('ERROR: No amplicons found - check the submitted sequence is L.monocytogenes\n')
 
 progexit(0)
