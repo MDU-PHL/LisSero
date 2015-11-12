@@ -1,9 +1,9 @@
 # LisSero
 *In silico* serogroup prediction for *Listeria monocytogenes*
 
-## Author
-Jason Kwong (@kwongjc)  
-GitHub: [kwongj](https://github.com/kwongj)  
+## Authors
+* Jason Kwong (@kwongjc) - GitHub: [kwongj](https://github.com/kwongj)  
+* Torsten Seemann (@torstenseemann) - GitHub: [tseemann](https://github.com/tseemann)  
 
 ## Dependencies
 * [Python 2.x](https://www.python.org/downloads/)
@@ -81,4 +81,4 @@ GPLv2: [https://github.com/MDU-PHL/LisSero/blob/master/LICENSE](https://github.c
 
 ## References
 * Doumith et al. Differentiation of the major Listeria monocytogenes serovars by multiplex PCR.
-J Clin Microbiol, 2004; 42:8; 3819-22
+_J Clin Microbiol_, 2004; __42:8__; 3819-22.
