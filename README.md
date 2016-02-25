@@ -7,8 +7,20 @@
 
 ## Dependencies
 * [Python 2.x](https://www.python.org/downloads/)
-* [EMBOSS PrimerSearch](http://emboss.sourceforge.net/download/)
+* ~~[EMBOSS PrimerSearch](http://emboss.sourceforge.net/download/)~~
 * [isPcr](https://users.soe.ucsc.edu/~kent/) (Optional)
+
+The primary site for EMBOSS software was down when we last checked on 26 February 2016. 
+This does not seem to be a [temporary issue](https://www.biostars.org/p/147960/).
+
+We direct the user instead to this download page to obtain a 6.5.7 version:
+
+[EMBOSS PrimerSearch v.6.5.7](ftp://emboss.open-bio.org/pub/EMBOSS/old/6.5.0/)
+
+For version 6.6.0 (the very latest as far as we know), one can try this
+[mirror](http://debian.rub.de/ubuntu/pool/universe/e/emboss/emboss_6.6.0.orig.tar.gz) for a linux version.
+
+*All our tests were performed on version 6.6.0.*
 
 ## Usage
 `$ LisSero.py -h`  
