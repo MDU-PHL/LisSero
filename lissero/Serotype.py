@@ -86,17 +86,60 @@ class Serotype:
              length,
              slen,
              pident) = b.split('\t')
-            print(b)
             if float(pident) >= self.pid and\
                100*(float(length)/float(slen)) >= self.cov:
                 self.full_matches.update([saccver.split('~~')[0]])
             else:
-                pass
+                self.partial_matches.update([saccver.split('~~')[0]])
 
     def generate_serotype(self, query):
+        report = {'Prs': None,
+                  'lmo0737': None,
+                  'lmo1118': None,
+                  'ORF2110': None,
+                  'ORF2819': None}
         self.blast.add_query(query)
         self._blast_run()
         self._blast_parse()
+        for gene in report:
+            if gene in self.full_matches:
+                report[gene] = 'FULL MATCH'
+            elif gene in self.partial_matches:
+                report[gene] = 'PARTIAL MATCH'
+            else:
+                report[gene] = 'NOT FOUND'
+        if 'Prs' not in self.full_matches:
+            report['serotype'] = 'Nontypable'
+            report['comment'] = 'No Prs found'
+        elif 'lmo0737' in self.full_matches and\
+             'ORF2819' not in self.full_matches and\
+             'ORF2110' not in self.full_matches:
+            if 'lmo1118' in self.full_matches:
+                report['serotype'] = '1/2c, 3c'
+                report['comment'] = None
+            else:
+                report['serotype'] = '1/2a, 3a'
+                report['comment'] = None
+        elif 'ORF2819' in self.full_matches and\
+             'lmo0737' not in self.full_matches and\
+             'lmo1118' not in self.full_matches:
+            if 'ORF2110' in self.full_matches:
+                report['serotype'] = '4b, 4d, 4e'
+                report['comment'] = None
+            else:
+                report['serotype'] = "1/2b, 3b, 7"
+                report['comment'] = None
+        elif 'lmo0737' in self.full_matches and\
+             'ORF2819' in self.full_matches and\
+             'ORF2110' in self.full_matches:
+            report['serotype'] = '4b, 4d, 4e*'
+            report['comment'] = 'Unusual 4b with lmo0737'
+        else:
+            report['serotype'] = 'Nontypable'
+            report['comment'] = 'No combination of fully matched genes'\
+                                ' resulted in a known serotype.'
+        report['query'] = query
+        self.report = report
         pass
 
 
