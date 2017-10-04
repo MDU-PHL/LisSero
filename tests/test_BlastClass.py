@@ -1,4 +1,5 @@
 import pytest
+
 from lissero.Blast import Blast
 
 run_blast = Blast()

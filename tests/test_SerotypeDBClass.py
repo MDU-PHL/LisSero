@@ -1,6 +1,5 @@
 import pytest
 import os
-import shlex
 from lissero.Serotype import SerotypeDB
 from lissero.Serotype import Serotype
 from lissero.Blast import Blast
@@ -16,7 +15,6 @@ test_2 = os.path.join(test_folder, 'test_seq', 'NC_013768.fna')
 test_3 = os.path.join(test_folder, 'test_seq', 'NC_017529.fna')
 test_4 = os.path.join(test_folder, 'test_seq', 'NC_018588.fna')
 test_5 = os.path.join(test_folder, 'test_seq', 'NC_018591.fna')
-
 
 
 @pytest.fixture(scope='session')
