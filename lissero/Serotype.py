@@ -12,11 +12,73 @@ import getpass
 import hashlib
 import shlex
 import copy
+import re
 
 from .Blast import MakeBlastDB
 
 
-class Serotype:
+class Typing:
+
+    BLAST_OUTFMT = '6'
+    OUTPUT_HEADER = ['ID', 'TYPE',
+                     'DB_VERSION']
+
+    def __init__(self, blast_run, db,
+                 cov=100,
+                 pid=100):
+        self.db_version = db.version
+        path_db = os.path.realpath(db.db_name)
+        self.blast = copy.deepcopy(blast_run)
+        self.blast.add_db(path_db)
+        self.blast.add_option('-ungapped')
+        self.blast.add_option('-culling_limit', 1)
+        self.blast.add_option('-outfmt', self.BLAST_OUTFMT)
+        self.blast.add_option('-dust', 'no')
+        self.cov = cov
+        self.pid = pid
+
+    def __str__(self):
+        try:
+            string = json.dumps(self.report, indent=4)
+        except:
+            string = '{}'
+        return string
+
+    def _blast_run(self):
+        self.blast_res = self.blast.run()
+
+    def _blast_parse(self):
+        self.full_matches = set()
+        self.partial_matches = set()
+        blast_matches = self.blast_res.stdout.strip().split('\n')
+        for b in blast_matches:
+            (qaccver,
+             saccver,
+             length,
+             slen,
+             pident) = b.split('\t')
+            if float(pident) >= self.pid and\
+               100*(float(length)/float(slen)) >= self.cov:
+                self.full_matches.update([saccver.split('~~')[0]])
+            else:
+                self.partial_matches.update([saccver.split('~~')[0]])
+
+    def tab_report(self, header=True, sep=','):
+        if header:
+            print(sep.join(self.OUTPUT_HEADER))
+        out = []
+        for field in self.OUTPUT_HEADER:
+            out += [self.report[field.lower()]]
+        print(sep.join(out))
+
+    def csv_report(self, header=True):
+        self.tab_report(sep=',', header=header)
+
+    def tsv_report(self, header=True):
+        self.tab_report(sep='\t', header=header)
+
+
+class Serotype(Typing):
     '''
     Serotyping of Listeria monocytogenes samples is performed throught the
     presence abscense of five genes.
@@ -59,22 +121,19 @@ class Serotype:
     '''
 
     BLAST_OUTFMT = '6 qaccver saccver length slen pident'
+    OUTPUT_HEADER = ['ID', 'SEROTYPE',
+                     'Prs', 'lmo0737',
+                     'lmo1118', 'ORF2110',
+                     'ORF2819', 'COMMENT',
+                     'DB_VERSION']
 
-    def __init__(self, blast_run, path_db,
+    def __init__(self, blast_run, db,
                  cov=100,
                  pid=98):
-        path_db = os.path.realpath(path_db)
-        self.blast = copy.deepcopy(blast_run)
-        self.blast.add_db(path_db)
-        self.blast.add_option('-ungapped')
-        self.blast.add_option('-culling_limit', 1)
-        self.blast.add_option('-outfmt', self.BLAST_OUTFMT)
-        self.blast.add_option('-dust', 'no')
-        self.cov = cov
-        self.pid = pid
-
-    def _blast_run(self):
-        self.blast_res = self.blast.run()
+                super().__init__(blast_run=blast_run,
+                                 db=db,
+                                 cov=cov,
+                                 pid=pid)
 
     def _blast_parse(self):
         self.full_matches = set()
@@ -86,50 +145,51 @@ class Serotype:
              length,
              slen,
              pident) = b.split('\t')
-            if float(pident) >= self.pid and\
-               100*(float(length)/float(slen)) >= self.cov:
-                self.full_matches.update([saccver.split('~~')[0]])
+            obs_pid = float(pident)
+            obs_cov = 100 * (float(length)/float(slen))
+            if obs_pid >= self.pid and obs_cov >= self.cov:
+                self.full_matches.update([saccver.split('~~')[0].upper()])
             else:
-                self.partial_matches.update([saccver.split('~~')[0]])
+                self.partial_matches.update([saccver.split('~~')[0].upper()])
 
-    def generate_serotype(self, query):
-        report = {'Prs': None,
+    def generate_type(self, query):
+        report = {'prs': None,
                   'lmo0737': None,
                   'lmo1118': None,
-                  'ORF2110': None,
-                  'ORF2819': None}
+                  'orf2110': None,
+                  'orf2819': None}
         self.blast.add_query(query)
         self._blast_run()
         self._blast_parse()
         for gene in report:
-            if gene in self.full_matches:
+            if gene.upper() in self.full_matches:
                 report[gene] = 'FULL MATCH'
-            elif gene in self.partial_matches:
+            elif gene.upper() in self.partial_matches:
                 report[gene] = 'PARTIAL MATCH'
             else:
                 report[gene] = 'NOT FOUND'
-        if 'Prs' not in self.full_matches:
+        if 'PRS' not in self.full_matches:
             report['serotype'] = 'Nontypable'
             report['comment'] = 'No Prs found'
-        elif 'lmo0737' in self.full_matches and\
+        elif 'LMO0737' in self.full_matches and\
              'ORF2819' not in self.full_matches and\
              'ORF2110' not in self.full_matches:
-            if 'lmo1118' in self.full_matches:
+            if 'LMO1118' in self.full_matches:
                 report['serotype'] = '1/2c, 3c'
                 report['comment'] = None
             else:
                 report['serotype'] = '1/2a, 3a'
                 report['comment'] = None
         elif 'ORF2819' in self.full_matches and\
-             'lmo0737' not in self.full_matches and\
-             'lmo1118' not in self.full_matches:
+             'LMO0737' not in self.full_matches and\
+             'LMO1118' not in self.full_matches:
             if 'ORF2110' in self.full_matches:
                 report['serotype'] = '4b, 4d, 4e'
                 report['comment'] = None
             else:
                 report['serotype'] = "1/2b, 3b, 7"
                 report['comment'] = None
-        elif 'lmo0737' in self.full_matches and\
+        elif 'LMO0737' in self.full_matches and\
              'ORF2819' in self.full_matches and\
              'ORF2110' in self.full_matches:
             report['serotype'] = '4b, 4d, 4e*'
@@ -138,9 +198,113 @@ class Serotype:
             report['serotype'] = 'Nontypable'
             report['comment'] = 'No combination of fully matched genes'\
                                 ' resulted in a known serotype.'
-        report['query'] = query
+        report['id'] = query
+        report['db_version'] = self.db_version()
         self.report = report
-        pass
+
+
+class BinaryType(Typing):
+    '''
+    Listeria Binary Typing.
+
+    The Binary Type is the sum of the individual gene numbers.
+
+    For example, an isolate with genes 1, 4, and 32 would have a
+    binary type of 37.
+    '''
+
+    BLAST_OUTFMT = '6 qaccver saccver length slen pident'
+    OUTPUT_HEADER = ['ID', 'BINARYTYPE',
+                     '1', '2',
+                     '4', '8',
+                     '16', '32',
+                     '64', '128',
+                     'COMMENT',
+                     'DB_VERSION']
+
+    def __init__(self, blast_run, db,
+                 cov=100,
+                 pid=98):
+                super().__init__(blast_run=blast_run,
+                                 db=db,
+                                 cov=cov,
+                                 pid=pid)
+
+    def _blast_parse(self):
+        self.full_matches = list()
+        self.partial_matches = list()
+        blast_matches = self.blast_res.stdout.strip().split('\n')
+        for b in blast_matches:
+            (qaccver,
+             saccver,
+             length,
+             slen,
+             pident) = b.split('\t')
+            obs_pid = float(pident)
+            obs_cov = 100 * (float(length)/float(slen))
+            if obs_pid >= self.pid and obs_cov >= self.cov:
+                self.full_matches += [int(saccver.split('~~')[0])]
+            else:
+                self.partial_matches += [int(saccver.split('~~')[0])]
+
+    def generate_type(self, query):
+        report = {'1': None,
+                  '2': None,
+                  '4': None,
+                  '8': None,
+                  '16': None,
+                  '32': None,
+                  '64': None,
+                  '128': None}
+        self.blast.add_query(query)
+        self._blast_run()
+        self._blast_parse()
+        binary_type = 0
+        qualifier = set([''])
+        for gene in report:
+            if int(gene) in self.full_matches:
+                occurrences = self.full_matches.count(int(gene))
+                if occurrences > 1:
+                    report[gene] = f'MULTIPLE FULL MATCHES ({occurrences})'
+                else:
+                    report[gene] = 'FULL MATCH'
+            elif int(gene) in self.partial_matches:
+                occurrences = self.partial_matches.count(int(gene))
+                if occurrences > 1:
+                    report[gene] = f'MULTIPLE PARTIAL MATCHES ({occurences})'
+                else:
+                    report[gene] = 'PARTIAL MATCH'
+            else:
+                report[gene] = 'NOT FOUND'
+        comment = set()
+        for gene in report:
+            if report[gene] == 'FULL MATCH':
+                binary_type += int(gene)
+            elif report[gene] == 'NOT FOUND':
+                continue
+            elif report[gene] == 'PARTIAL MATCH':
+                comment.update(["PARTIAL ALLELES FOUND, NOT COUNTED"
+                                " TOWARDS BINARY TYPE"])
+                qualifier.update('~')
+            elif re.search('MULTIPLE FULL', report[gene]):
+                comment.update(["MULTIPLE FULL COPIES OF ALLELE,"
+                                " NOT COUNTED TOWARDS BINARY TYPE"])
+                qualifier += '^'
+            elif re.search('MULTIPLE PARTIAL', report[gene]):
+                comment.update(["MULTIPLE PARTIAL COPIES OF ALLELE,"
+                                " NOT COUNTED TOWARDS BINARY TYPE"])
+                qualifier.update('%')
+            else:
+                logging.critical(f"SOMETHING WENT WRONG WITH TYPING {self.query}")
+                raise RuntimeError
+        report['comment'] = ' | '.join(list(comment))
+        if report['comment'] == '':
+            report['comment'] = None
+        qualifier = ''.join(list(qualifier))
+        report['binarytype'] = f'{binary_type}{qualifier}'
+        report['id'] = query
+        report['db_version'] = self.db_version()
+        self.report = report
 
 
 class SerotypeDB:
@@ -186,7 +350,7 @@ class SerotypeDB:
         return self.db_name
 
     def version(self):
-        return self.log_db['date created']
+        return self.db_log['date_created']
 
     def _load_log(self):
         if os.path.exists(self.log_file):
