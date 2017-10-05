@@ -10,6 +10,7 @@ from .Serotype import BinaryType
 
 class Sample:
     def __init__(self, filename, blast, sero_db, bt_db):
+        self.id = filename
         self.filename = os.path.realpath(filename)
         self.serotype = Serotype(blast, sero_db)
         self.binarytype = BinaryType(blast, bt_db)
@@ -24,16 +25,12 @@ class Sample:
         self.binarytype.generate_type(self.filename)
 
     def __str__(self):
-        # try:
-        #     string = f"{self.filename}"\
-        #              f"\tSEROTYPE: {self.serotype.report['serotype']}"\
-        #              f"\tBINARYTYPE: {self.serotype.report['binarytype']}"
-        # except:
-        #     string = ''
-        # return string
-        string = f"{self.filename}"\
-                 f"\tSEROTYPE: {self.serotype.report['serotype']}"\
-                 f"\tBINARYTYPE: {self.binarytype.report['binarytype']}"
+        try:
+            string = f"{self.id}"\
+                     f"\tSEROTYPE: {self.serotype.report['serotype']}"\
+                     f"\tBINARYTYPE: {self.binarytype.report['binarytype']}"
+        except:
+            string = ''
         return string
 
 
