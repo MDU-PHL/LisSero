@@ -313,7 +313,6 @@ class BinaryType(Typing):
             if n_hits == 0:
                 tmp['blast_summary'] = 'NOT FOUND'
             elif n_hits == 1:
-                print(tmp)
                 if tmp['blast_hits'][0]['match'] == 'FULL':
                     tmp['blast_summary'] = 'FULL MATCH'
                     tmp['consensus'] = tmp['blast_hits'][0]['gene']
@@ -392,7 +391,7 @@ class SerotypeDB:
             logging.critical(f'I don\'t understand db_type = {db_type}')
             raise IOError
         self.force = force
-        self.log_file = os.path.join(self.path_db, 'lissero_db.json')
+        self.log_file = os.path.join(self.path_db, db_name+'_db.json')
         self.db_log = {}
 
     def check_db(self):
@@ -424,7 +423,7 @@ class SerotypeDB:
     def _load_log(self):
         if os.path.exists(self.log_file):
             fh = open(self.log_file, 'rt')
-            self.log_db = json.load(fh)
+            self.db_log = json.load(fh)
             logging.info("Successfully loaded DB log!")
             fh.close()
         else:
