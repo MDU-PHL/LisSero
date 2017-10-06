@@ -16,7 +16,7 @@ from .Serotype import SerotypeDB
               envvar='LISSERO_DB')
 @click.option("-b", "--binarytype_db", default=None,
               envvar='LISBT_DB')
-@click.option("--debug", is_flag=True, default=False)
+@click.option("--debug", is_flag=True)
 @click.argument("fasta", nargs=-1)
 def run_lissero(serotype_db, binarytype_db, debug, fasta):
     '''
