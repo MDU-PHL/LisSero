@@ -370,6 +370,7 @@ class BinaryType(Typing):
         self.report['binarytype'] = f'{binarytype}{qualifiers}'
         self.report['id'] = query
         self.report['db_version'] = self.db_version()
+        logging.debug(self.report)
 
 
 class SerotypeDB:

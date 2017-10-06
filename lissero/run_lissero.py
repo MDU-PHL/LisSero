@@ -16,6 +16,7 @@ from .Serotype import SerotypeDB
               envvar='LISSERO_DB')
 @click.option("-b", "--binarytype_db", default=None,
               envvar='LISBT_DB')
+@click.option("--debug", is_flag=True, default=False)
 @click.argument("fasta", nargs=-1)
 def run_lissero(serotype_db, binarytype_db, fasta):
     '''
@@ -35,7 +36,11 @@ def run_lissero(serotype_db, binarytype_db, fasta):
         SA, Australia, 2007; 136–137.
 
     '''
-    logging.basicConfig(level=logging.INFO)
+    if debug:
+        log_level = logging.DEBUG
+    else:
+        log_level = logging.INFO
+        logging.basicConfig(level=log_level)
     path_serodb = os.path.realpath(serotype_db)
     path_btdb = os.path.realpath(binarytype_db)
     sero_db = SerotypeDB(path_db=path_serodb,
