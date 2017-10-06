@@ -20,9 +20,11 @@ class Sample:
         pass
 
     def get_serotype(self):
+        logging.info(f'Serotyping: {self.id}')
         self.serotype.generate_type(self.filename)
 
     def get_binarytype(self):
+        logging.info(f'Binary Typing: {self.id}')
         self.binarytype.generate_type(self.filename)
 
     def __str__(self):
@@ -74,7 +76,6 @@ class Samples:
             serotype = sample.serotype.report['serotype']
             binarytype = sample.binarytype.report['binarytype']
             print('\t'.join([sample_id, serotype, binarytype]))
-
 
     def __str__(self):
         return f'Typing {len(self.filenames)} samples'
