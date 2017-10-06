@@ -205,6 +205,7 @@ class Serotype(Typing):
         report['id'] = query
         report['db_version'] = self.db_version()
         self.report = report
+        logging.debug(report)
 
 
 class BinaryType(Typing):
