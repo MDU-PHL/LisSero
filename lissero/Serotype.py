@@ -12,9 +12,13 @@ import getpass
 import hashlib
 import shlex
 import copy
-import re
+import pkg_resources
 
 from .Blast import MakeBlastDB
+
+
+SEROTYPE_FASTA = 'db/sequences.fasta'
+BINARYTYPE_FASTA = 'db/binary_sequences.fasta'
 
 
 class Typing:
@@ -221,95 +225,157 @@ class BinaryType(Typing):
                      '64', '128',
                      'COMMENT',
                      'DB_VERSION']
+    DEFAULT_REPORT = {'blast_hits': [],
+                      'consensus': None,
+                      'blast_summary': None,
+                      'comments': None,
+                      'qualifier': None
+                      }
+
+    GENES = ['1', '2', '4',
+             '8', '16', '32',
+             '64', '128']
 
     def __init__(self, blast_run, db,
-                 cov=100,
-                 pid=98):
+                 cov=95,
+                 pid=95):
                 super().__init__(blast_run=blast_run,
                                  db=db,
                                  cov=cov,
                                  pid=pid)
 
     def _blast_parse(self):
-        self.full_matches = list()
-        self.partial_matches = list()
+        self.blast_hits = []
         blast_matches = self.blast_res.stdout.strip().split('\n')
         for b in blast_matches:
-            (qaccver,
-             saccver,
-             length,
-             slen,
-             pident) = b.split('\t')
-            obs_pid = float(pident)
-            obs_cov = 100 * (float(length)/float(slen))
-            if obs_pid >= self.pid and obs_cov >= self.cov:
-                self.full_matches += [int(saccver.split('~~')[0])]
+            blast_json = dict(
+                zip(
+                    ['query_id',
+                     'hit_id',
+                     'alignment_length',
+                     'hit_length',
+                     'percent_id'],
+                    b.split('\t')
+                )
+            )
+            blast_json['alignment_length'] = float(blast_json['alignment_length'])
+            blast_json['hit_length'] = float(blast_json['hit_length'])
+            blast_json['percent_id'] = float(blast_json['percent_id'])
+            blast_json['coverage'] = 100 * (blast_json['alignment_length']/blast_json['hit_length'])
+            blast_json['gene'] = int(blast_json['hit_id'].split('~~')[0])
+            if blast_json['percent_id'] >= self.pid and blast_json['coverage'] >= self.cov:
+                blast_json['match'] = 'FULL'
             else:
-                self.partial_matches += [int(saccver.split('~~')[0])]
+                blast_json['match'] = 'PARTIAL'
+            self.blast_hits += [blast_json]
+
+    def _map_hits_to_genes(self):
+        report = {g: copy.deepcopy(self.DEFAULT_REPORT) for g in self.GENES}
+        for hit in self.blast_hits:
+            gene = str(hit['gene'])
+            report[gene]['blast_hits'] += [hit]
+        self.report = report
+
+    def _parse_multiple_hits(self, hits):
+        n_full_hits = 0
+        n_partial_matches = 0
+        full_hits = []
+        for hit in hits:
+            if hit['match'] == 'FULL':
+                n_full_hits += 1
+                full_hits += [hit]
+            else:
+                n_partial_matches += 1
+        if n_full_hits == 0:
+            return (f'MULTIPLE PARTIAL MATCHES ({n_partial_matches})',
+                    None,
+                    '%',
+                    "MULTIPLE PARTIAL COPIES OF ALLELE,"
+                    " NOT COUNTED TOWARDS BINARY TYPE"
+                    )
+        elif n_full_hits == 1:
+            return('FULL MATCH',
+                   full_hits[0]['gene'],
+                   None,
+                   None)
+        else:
+            return(f'MULTIPLE FULL MATCHES ({n_full_hits})',
+                   None,
+                   '^',
+                   "MULTIPLE FULL COPIES OF ALLELE,"
+                   " NOT COUNTED TOWARDS BINARY TYPE"
+                   )
+
+    def _check_mapping(self):
+        for g in self.report:
+            tmp = self.report[g]
+            n_hits = len(tmp['blast_hits'])
+            if n_hits == 0:
+                tmp['blast_summary'] = 'NOT FOUND'
+            elif n_hits == 1:
+                print(tmp)
+                if tmp['blast_hits'][0]['match'] == 'FULL':
+                    tmp['blast_summary'] = 'FULL MATCH'
+                    tmp['consensus'] = tmp['blast_hits'][0]['gene']
+                else:
+                    tmp['blast_summary'] = 'PARTIAL MATCH'
+                    tmp['consensus'] = tmp['blast_hits'][0]['gene']
+                    tmp['qualifier'] = '~'
+                    tmp['comment'] = "PARTIAL ALLELES FOUND, NOT COUNTED"\
+                                     " TOWARDS BINARY TYPE"
+            else:
+                (tmp['blast_summary'],
+                 tmp['consensus'],
+                 tmp['qualifier'],
+                 tmp['comment']) = self._parse_multiple_hits(tmp['blast_hits'])
+
+    def _type(self):
+        binarytype = 0
+        for g in self.report:
+            tmp = self.report[g]
+            if tmp['blast_summary'] == 'FULL MATCH':
+                binarytype += tmp['consensus']
+        return binarytype
+
+    def _qualifiers(self):
+        qualifiers = ''
+        for g in self.report:
+            tmp = self.report[g]
+            if tmp['qualifier'] is not None:
+                qualifiers += tmp['qualifier']
+        qualifiers = list(set(qualifiers))
+        qualifiers = ''.join(qualifiers)
+        return qualifiers
+
+    def _comments(self):
+        comments = []
+        for g in self.report:
+            tmp = self.report[g]
+            if tmp["comments"] is not None:
+                comments += [tmp['comment']]
+        if len(comments) == 0:
+            comments = ''
+        else:
+            comments = ';'.join(comments)
+        return comments
 
     def generate_type(self, query):
-        report = {'1': None,
-                  '2': None,
-                  '4': None,
-                  '8': None,
-                  '16': None,
-                  '32': None,
-                  '64': None,
-                  '128': None}
         self.blast.add_query(query)
         self._blast_run()
         self._blast_parse()
-        binary_type = 0
-        qualifier = set([''])
-        for gene in report:
-            if int(gene) in self.full_matches:
-                occurrences = self.full_matches.count(int(gene))
-                if occurrences > 1:
-                    report[gene] = f'MULTIPLE FULL MATCHES ({occurrences})'
-                else:
-                    report[gene] = 'FULL MATCH'
-            elif int(gene) in self.partial_matches:
-                occurrences = self.partial_matches.count(int(gene))
-                if occurrences > 1:
-                    report[gene] = f'MULTIPLE PARTIAL MATCHES ({occurences})'
-                else:
-                    report[gene] = 'PARTIAL MATCH'
-            else:
-                report[gene] = 'NOT FOUND'
-        comment = set()
-        for gene in report:
-            if report[gene] == 'FULL MATCH':
-                binary_type += int(gene)
-            elif report[gene] == 'NOT FOUND':
-                continue
-            elif report[gene] == 'PARTIAL MATCH':
-                comment.update(["PARTIAL ALLELES FOUND, NOT COUNTED"
-                                " TOWARDS BINARY TYPE"])
-                qualifier.update('~')
-            elif re.search('MULTIPLE FULL', report[gene]):
-                comment.update(["MULTIPLE FULL COPIES OF ALLELE,"
-                                " NOT COUNTED TOWARDS BINARY TYPE"])
-                qualifier += '^'
-            elif re.search('MULTIPLE PARTIAL', report[gene]):
-                comment.update(["MULTIPLE PARTIAL COPIES OF ALLELE,"
-                                " NOT COUNTED TOWARDS BINARY TYPE"])
-                qualifier.update('%')
-            else:
-                logging.critical(f"SOMETHING WENT WRONG WITH TYPING {self.query}")
-                raise RuntimeError
-        report['comment'] = ' | '.join(list(comment))
-        if report['comment'] == '':
-            report['comment'] = None
-        qualifier = ''.join(list(qualifier))
-        report['binarytype'] = f'{binary_type}{qualifier}'
-        report['id'] = query
-        report['db_version'] = self.db_version()
-        self.report = report
+        self._map_hits_to_genes()
+        self._check_mapping()
+        binarytype = self._type()
+        qualifiers = self._qualifiers()
+        self.report["comments"] = self._comments()
+        self.report['binarytype'] = f'{binarytype}{qualifiers}'
+        self.report['id'] = query
+        self.report['db_version'] = self.db_version()
 
 
 class SerotypeDB:
     def __init__(self, path_db,
-                 infile=None,
+                 db_type,
                  db_name='lissero',
                  title='Listeria Serotyping BLAST DB',
                  makeblastdb_path=None,
@@ -317,11 +383,14 @@ class SerotypeDB:
         self.title = title
         self.path_db = os.path.realpath(path_db)
         self.db_name = os.path.join(self.path_db, db_name)
-        if infile is not None:
-            self.infile = os.path.realpath(infile)
-            self.mkdb = MakeBlastDB(makeblastdb_path=makeblastdb_path)
+        self.mkdb = MakeBlastDB(makeblastdb_path=makeblastdb_path)
+        if db_type == 'serotype':
+            self.infile = pkg_resources.resource_filename('lissero', SEROTYPE_FASTA)
+        elif db_type == 'binary_type':
+            self.infile = pkg_resources.resource_filename('lissero', BINARYTYPE_FASTA)
         else:
-            self.infile = None
+            logging.critical(f'I don\'t understand db_type = {db_type}')
+            raise IOError
         self.force = force
         self.log_file = os.path.join(self.path_db, 'lissero_db.json')
         self.db_log = {}
