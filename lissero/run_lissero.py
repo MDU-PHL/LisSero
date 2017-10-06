@@ -18,7 +18,7 @@ from .Serotype import SerotypeDB
               envvar='LISBT_DB')
 @click.option("--debug", is_flag=True, default=False)
 @click.argument("fasta", nargs=-1)
-def run_lissero(serotype_db, binarytype_db, fasta):
+def run_lissero(serotype_db, binarytype_db, debug, fasta):
     '''
     In silico serogroup prediction for L. monocytogenes.
     Alleles: lmo1118, lmo0737, ORF2819, ORF2110, Prs
