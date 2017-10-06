@@ -10,11 +10,25 @@ from .Serotype import BinaryType
 
 
 class Sample:
-    def __init__(self, filename, blast, sero_db, bt_db):
+    def __init__(self, filename,
+                 blast,
+                 sero_db,
+                 sg_min_id,
+                 sg_min_cov,
+                 bt_db,
+                 bt_min_id,
+                 bt_min_cov
+                 ):
         self.id = filename
         self.filename = os.path.realpath(filename)
-        self.serotype = Serotype(blast, sero_db)
-        self.binarytype = BinaryType(blast, bt_db)
+        self.serotype = Serotype(blast,
+                                 sero_db,
+                                 pid=sg_min_id,
+                                 cov=sg_min_cov)
+        self.binarytype = BinaryType(blast,
+                                     bt_db,
+                                     pid=bt_min_id,
+                                     cov=bt_min_cov)
 
     def is_fasta(self):
         pass
@@ -41,16 +55,34 @@ class Samples:
 
     SIMPLE_HEADER = ['ID', 'SEROTYPE', 'BINARYTYPE']
 
-    def __init__(self, filenames, blast, sero_db, bt_db):
+    def __init__(self, filenames,
+                 blast,
+                 sero_db,
+                 sg_min_id,
+                 sg_min_cov,
+                 bt_db,
+                 bt_min_id,
+                 bt_min_cov):
         self.filenames = filenames
         self.blast = blast
         self.sero_db = sero_db
         self.bt_db = bt_db
+        self.sg_min_id = sg_min_id
+        self.sg_min_cov = sg_min_cov
+        self.bt_min_id = bt_min_id
+        self.bt_min_cov = bt_min_cov
 
     def _create_sample(self):
         self.samples = []
         for f in self.filenames:
-            self.samples += [Sample(f, self.blast, self.sero_db, self.bt_db)]
+            self.samples += [Sample(f,
+                                    blast=self.blast,
+                                    sero_db=self.sero_db,
+                                    bt_db=self.bt_db,
+                                    sg_min_id=self.sg_min_id,
+                                    sg_min_cov=self.sg_min_cov,
+                                    bt_min_id=self.bt_min_id,
+                                    bt_min_cov=self.bt_min_cov)]
 
     def _run_typing(self, func):
         if func == 'serotype':

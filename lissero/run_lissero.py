@@ -16,9 +16,17 @@ from .Serotype import SerotypeDB
               envvar='LISSERO_DB')
 @click.option("-b", "--binarytype_db", default=None,
               envvar='LISBT_DB')
+@click.option("--bt_min_id", default=90)
+@click.option("--bt_min_cov", default=95)
+@click.option("--sg_min_id", default=95)
+@click.option("--sg_min_cov", default=95)
 @click.option("--debug", is_flag=True)
 @click.argument("fasta", nargs=-1)
-def run_lissero(serotype_db, binarytype_db, debug, fasta):
+def run_lissero(serotype_db, binarytype_db,
+                sg_min_id, sg_min_cov,
+                bt_min_id, bt_min_cov,
+                debug,
+                fasta):
     '''
     In silico serogroup prediction for L. monocytogenes.
     Alleles: lmo1118, lmo0737, ORF2819, ORF2110, Prs
@@ -54,7 +62,11 @@ def run_lissero(serotype_db, binarytype_db, debug, fasta):
     samples = Samples(fasta,
                       blast=blast,
                       sero_db=sero_db,
-                      bt_db=bt_db)
+                      bt_db=bt_db,
+                      sg_min_id=sg_min_id,
+                      sg_min_cov=sg_min_cov,
+                      bt_min_id=bt_min_id,
+                      bt_min_cov=bt_min_cov)
     samples.run_typing()
     samples.simple_report()
 
