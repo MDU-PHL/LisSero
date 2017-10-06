@@ -3,6 +3,7 @@ A sample class for LisSero
 '''
 
 import os
+import logging
 
 from .Serotype import Serotype
 from .Serotype import BinaryType
@@ -35,5 +36,45 @@ class Sample:
 
 
 class Samples:
-    def __init__(self):
+
+    SIMPLE_HEADER = ['ID', 'SEROTYPE', 'BINARYTYPE']
+
+    def __init__(self, filenames, blast, sero_db, bt_db):
+        self.filenames = filenames
+        self.blast = blast
+        self.sero_db = sero_db
+        self.bt_db = bt_db
+
+    def _create_sample(self):
+        self.samples = []
+        for f in self.filenames:
+            self.samples += [Sample(f, self.blast, self.sero_db, self.bt_db)]
+
+    def _run_typing(self, func):
+        if func == 'serotype':
+            for f in self.samples:
+                f.get_serotype()
+        elif func == 'binarytype':
+            for f in self.samples:
+                f.get_binarytype()
+        else:
+            logging.critical(f"Unknown function {func}")
+            raise RuntimeError
+
+    def run_typing(self):
+        self._create_sample()
+        self._run_typing("serotype")
+        self._run_typing("binarytype")
         pass
+
+    def simple_report(self, header=True):
+        print('\t'.join(self.SIMPLE_HEADER))
+        for sample in self.samples:
+            sample_id = sample.serotype.report['id']
+            serotype = sample.serotype.report['serotype']
+            binarytype = sample.binarytype.report['binarytype']
+            print('\t'.join([sample_id, serotype, binarytype]))
+
+
+    def __str__(self):
+        return f'Typing {len(self.filenames)} samples'
