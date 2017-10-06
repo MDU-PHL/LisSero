@@ -99,7 +99,6 @@ class Samples:
         self._create_sample()
         self._run_typing("serotype")
         self._run_typing("binarytype")
-        pass
 
     def simple_report(self, header=True):
         print('\t'.join(self.SIMPLE_HEADER))
