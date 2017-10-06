@@ -40,7 +40,7 @@ def run_lissero(serotype_db, binarytype_db, debug, fasta):
         log_level = logging.DEBUG
     else:
         log_level = logging.INFO
-        logging.basicConfig(level=log_level)
+    logging.basicConfig(level=log_level)
     path_serodb = os.path.realpath(serotype_db)
     path_btdb = os.path.realpath(binarytype_db)
     sero_db = SerotypeDB(path_db=path_serodb,
