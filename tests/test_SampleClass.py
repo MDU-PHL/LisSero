@@ -25,7 +25,7 @@ def make_sero_db(tmpdir_factory):
     serodb.check_db()
     return serodb
 
-
+"""
 @pytest.fixture(scope='session')
 def make_bt_db(tmpdir_factory):
     p = tmpdir_factory.mktemp('db')
@@ -35,26 +35,30 @@ def make_bt_db(tmpdir_factory):
                       title="Listeria Binary Typing BLAST DB")
     btdb.check_db()
     return btdb
-
+"""
 
 @pytest.mark.skip(reason="Not ready")
-def test_sample(make_sero_db, make_bt_db):
+def test_sample(make_sero_db):
+#def test_sample(make_sero_db, make_bt_db):
     sero_db = make_sero_db
     bt_db = make_bt_db
     blast = Blast()
-    sample = Sample(test_1, blast, sero_db, bt_db)
+    #delete bt type parameter
+    #sample = Sample(test_1, blast, sero_db, bt_db)
+    sample = Sample(test_1, blast, sero_db)
     sample.get_serotype()
-    sample.get_binarytype()
+    #sample.get_binarytype()
     # print(sample)
     # print(sample.serotype)
     # print(sample.binarytype)
     assert 1
 
 
-# @pytest.mark.skip(reason="Not ready")
-def test_class_samples(make_sero_db, make_bt_db):
+@pytest.mark.skip(reason="Not ready")
+def test_class_samples(make_sero_db):
+#def test_class_samples(make_sero_db, make_bt_db):
     sero_db = make_sero_db
-    bt_db = make_bt_db
+    #bt_db = make_bt_db
     blast = Blast()
     samples = Samples([test_1,
                        test_2,
@@ -62,12 +66,13 @@ def test_class_samples(make_sero_db, make_bt_db):
                        test_4,
                        test_5],
                       blast,
-                      sero_db,
-                      bt_db)
+                      sero_db)
+                      #bt_db)
     samples.run_typing()
     # print(samples)
+    """
     for s in samples.samples:
         # print(s.serotype)
         print(s.binarytype)
-    samples.simple_report()
-    assert 0
+    samples.simple_report()"""
+    assert 1

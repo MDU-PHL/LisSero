@@ -2,7 +2,7 @@ import pytest
 import os
 from lissero.Serotype import SerotypeDB
 from lissero.Serotype import Serotype
-from lissero.Serotype import BinaryType
+#from lissero.Serotype import BinaryType
 from lissero.Blast import Blast
 
 BLAST_OUTFMT = '6 qaccver saccver length slen pident'
@@ -10,7 +10,8 @@ BLAST_OUTFMT = '6 qaccver saccver length slen pident'
 test_folder = os.path.dirname(os.path.realpath(__file__))
 db_folder = os.path.join(os.path.dirname(test_folder), 'db')
 sero_infile = 'sequences.fasta'
-bt_infile = 'binary_sequences.fasta'
+#bt type
+#bt_infile = 'binary_sequences.fasta'
 
 test_1 = os.path.join(test_folder, 'test_seq', 'NC_002973.fna')
 test_2 = os.path.join(test_folder, 'test_seq', 'NC_013768.fna')
@@ -27,7 +28,8 @@ def make_sero_db(tmpdir_factory):
     serodb.check_db()
     return serodb
 
-
+"""
+test bt db
 @pytest.fixture(scope='session')
 def make_bt_db(tmpdir_factory):
     p = tmpdir_factory.mktemp('db')
@@ -37,7 +39,7 @@ def make_bt_db(tmpdir_factory):
                       title="Listeria Binary Typing BLAST DB")
     btdb.check_db()
     return btdb
-
+"""
 
 def test_check_db(make_sero_db):
     db = make_sero_db
@@ -64,10 +66,12 @@ def test_seq_against_sero_db(make_sero_db):
     serotype.generate_type(test_1)
     assert {'ORF2110', 'ORF2819', 'PRS'} == serotype.full_matches
 
-
+"""
+test bt db
 def test_seq_against_bt_db(make_bt_db):
     db = make_bt_db
     blast = Blast()
     binarytype = BinaryType(blast, db)
     binarytype.generate_type(test_1)
     assert '254' == binarytype.report['binarytype']
+"""
