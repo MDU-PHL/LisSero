@@ -68,7 +68,7 @@ def test_class_samples(make_sero_db):
                        test_4,
                        test_5],
                       blast,
-                      sero_db
+                      sero_db,
                       sg_min_id=sg_min_id,
                       sg_min_cov=sg_min_cov
                       )
