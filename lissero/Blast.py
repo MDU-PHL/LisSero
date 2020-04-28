@@ -11,7 +11,7 @@ import re
 
 class SubRunner:
 
-    version_pat = re.compile(r'(\d)\.(\d)\.(\d)')
+    version_pat = re.compile(r'(\d+)\.(\d+)\.(\d+)')
 
     def __init__(self, cmd, cmd_path=None):
         self.cmd = cmd
@@ -33,8 +33,6 @@ class SubRunner:
     def version(self):
         self.add_option('-version')
         res = self.run()
-        logging.info(res.stdout)
-        print(res.stdout)
         try:
             self.version_no = self.version_pat.findall(res.stdout)[0]
             major, minor, patch = self.version_no
