@@ -37,7 +37,7 @@ def make_bt_db(tmpdir_factory):
     return btdb
 """
 
-@pytest.mark.skip(reason="Not ready")
+#@pytest.mark.skip(reason="Not ready")
 def test_sample(make_sero_db):
 #def test_sample(make_sero_db, make_bt_db):
     sero_db = make_sero_db
@@ -54,7 +54,7 @@ def test_sample(make_sero_db):
     assert 1
 
 
-@pytest.mark.skip(reason="Not ready")
+#@pytest.mark.skip(reason="Not ready")
 def test_class_samples(make_sero_db):
 #def test_class_samples(make_sero_db, make_bt_db):
     sero_db = make_sero_db
