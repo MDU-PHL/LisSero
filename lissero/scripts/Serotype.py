@@ -18,7 +18,7 @@ from .Blast import MakeBlastDB
 
 
 SEROTYPE_FASTA = 'db/sequences.fasta'
-BINARYTYPE_FASTA = 'db/binary_sequences.fasta'
+#BINARYTYPE_FASTA = 'db/binary_sequences.fasta'
 
 
 class Typing:
@@ -207,7 +207,8 @@ class Serotype(Typing):
         self.report = report
         logging.debug(report)
 
-
+#delete BT
+"""
 class BinaryType(Typing):
     '''
     Listeria Binary Typing.
@@ -372,7 +373,7 @@ class BinaryType(Typing):
         self.report['id'] = query
         self.report['db_version'] = self.db_version()
         logging.debug(self.report)
-
+"""
 
 class SerotypeDB:
     def __init__(self, path_db,
@@ -387,8 +388,9 @@ class SerotypeDB:
         self.mkdb = MakeBlastDB(makeblastdb_path=makeblastdb_path)
         if db_type == 'serotype':
             self.infile = pkg_resources.resource_filename('lissero', SEROTYPE_FASTA)
-        elif db_type == 'binary_type':
-            self.infile = pkg_resources.resource_filename('lissero', BINARYTYPE_FASTA)
+        # NO binary Type
+        #elif db_type == 'binary_type':
+            #self.infile = pkg_resources.resource_filename('lissero', BINARYTYPE_FASTA)
         else:
             logging.critical(f'I don\'t understand db_type = {db_type}')
             raise IOError

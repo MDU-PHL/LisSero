@@ -6,27 +6,28 @@ import click
 import logging
 import os
 
-from .Sample import Samples
-from .Blast import Blast
-from .Serotype import SerotypeDB
+from scripts.Sample import Samples
+from scripts.Blast import Blast
+from scripts.Serotype import SerotypeDB
 
 
 @click.command()
 @click.option("-s", "--serotype_db", default=None,
               envvar='LISSERO_DB')
-@click.option("-b", "--binarytype_db", default=None,
-              envvar='LISBT_DB')
-@click.option("--bt_min_id", default=90)
-@click.option("--bt_min_cov", default=95)
+#@click.option("-b", "--binarytype_db", default=None,envvar='LISBT_DB')
+#@click.option("--bt_min_id", default=90)
+#@click.option("--bt_min_cov", default=95)
 @click.option("--sg_min_id", default=95)
 @click.option("--sg_min_cov", default=95)
 @click.option("--debug", is_flag=True)
 @click.argument("fasta", nargs=-1)
-def run_lissero(serotype_db, binarytype_db,
+def run_lissero(serotype_db, 
+                #binarytype_db,
                 sg_min_id, sg_min_cov,
-                bt_min_id, bt_min_cov,
+                #bt_min_id, bt_min_cov,
                 debug,
                 fasta):
+
     '''
     In silico serogroup prediction for L. monocytogenes.
     Alleles: lmo1118, lmo0737, ORF2819, ORF2110, Prs
@@ -54,19 +55,21 @@ def run_lissero(serotype_db, binarytype_db,
     sero_db = SerotypeDB(path_db=path_serodb,
                          db_type='serotype')
     sero_db.check_db()
+    """
     bt_db = SerotypeDB(path_db=path_btdb,
                        db_type='binary_type',
                        db_name='lisbt')
     bt_db.check_db()
+    """
     blast = Blast()
     samples = Samples(fasta,
                       blast=blast,
                       sero_db=sero_db,
-                      bt_db=bt_db,
                       sg_min_id=sg_min_id,
-                      sg_min_cov=sg_min_cov,
-                      bt_min_id=bt_min_id,
-                      bt_min_cov=bt_min_cov)
+                      sg_min_cov=sg_min_cov)
+                      #bt_db=bt_db,
+                      #bt_min_id=bt_min_id,
+                      #bt_min_cov=bt_min_cov)
     samples.run_typing()
     samples.simple_report()
 
