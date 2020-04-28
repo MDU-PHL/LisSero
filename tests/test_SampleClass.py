@@ -41,11 +41,12 @@ def make_bt_db(tmpdir_factory):
 def test_sample(make_sero_db):
 #def test_sample(make_sero_db, make_bt_db):
     sero_db = make_sero_db
-    bt_db = make_bt_db
+    #bt_db = make_bt_db
     blast = Blast()
+    sg_min_id, sg_min_cov = (95, 95)
     #delete bt type parameter
     #sample = Sample(test_1, blast, sero_db, bt_db)
-    sample = Sample(test_1, blast, sero_db)
+    sample = Sample(test_1, blast, sero_db, sg_min_id=sg_min_id,sg_min_cov=sg_min_cov)
     sample.get_serotype()
     #sample.get_binarytype()
     # print(sample)
@@ -58,6 +59,7 @@ def test_sample(make_sero_db):
 def test_class_samples(make_sero_db):
 #def test_class_samples(make_sero_db, make_bt_db):
     sero_db = make_sero_db
+    sg_min_id, sg_min_cov = (95, 95)
     #bt_db = make_bt_db
     blast = Blast()
     samples = Samples([test_1,
@@ -66,8 +68,11 @@ def test_class_samples(make_sero_db):
                        test_4,
                        test_5],
                       blast,
-                      sero_db)
-                      #bt_db)
+                      sero_db
+                      sg_min_id=sg_min_id,
+                      sg_min_cov=sg_min_cov
+                      )
+                                            #bt_db)
     samples.run_typing()
     # print(samples)
     """
