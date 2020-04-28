@@ -1,6 +1,6 @@
 import pytest
 
-from lissero.Blast import MakeBlastDB
+from lissero.scripts.Blast import MakeBlastDB
 
 run_mkdb = MakeBlastDB()
 

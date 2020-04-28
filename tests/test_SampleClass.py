@@ -1,9 +1,9 @@
 import pytest
 import os
-from lissero.Serotype import SerotypeDB
-from lissero.Blast import Blast
-from lissero.Sample import Sample
-from lissero.Sample import Samples
+from lissero.scripts.Serotype import SerotypeDB
+from lissero.scripts.Blast import Blast
+from lissero.scripts.Sample import Sample
+from lissero.scripts.Sample import Samples
 
 BLAST_OUTFMT = '6 qaccver saccver length slen pident'
 
