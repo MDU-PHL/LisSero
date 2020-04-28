@@ -33,6 +33,8 @@ class SubRunner:
     def version(self):
         self.add_option('-version')
         res = self.run()
+        logging.info(res.stdout)
+        print(res.stdout)
         try:
             self.version_no = self.version_pat.findall(res.stdout)[0]
             major, minor, patch = self.version_no
