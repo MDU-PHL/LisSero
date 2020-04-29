@@ -17,7 +17,7 @@ Dependencies
 
 -  `Python 3.6+ <https://www.python.org/downloads/>`__
 -  `BLAST
-   2.6.0 <https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download>`__
+   2.10.0 <https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download>`__
 
 Installation
 ------------
@@ -26,7 +26,7 @@ Installation
 
     pip3 install lissero
 
-Installing BLAST 2.6.0
+Installing BLAST 2.10.0
 ~~~~~~~~~~~~~~~~~~~~~~
 
 **Brew**:
@@ -74,16 +74,6 @@ to a group of serotypes.
 If only Prs is detected, these isolates are often serotype 4a or 4c,
 though LisSero reports these as "Nontypable".
 
-*In silico* binary typing for *Listeria monocytogenes*
-------------------------------------------------------
-
-Using the method described by Huang *et al* (2007), where eight
-fragments are multiplexed. Each fragment has a unique number (1, 2, 4,
-8, 16, 32, 64, and 128). The Binary Type is defined as the sum of the
-numbers of the present fragments.
-
-Therefore, a sample with fragments 1, 4, and 16 would have a binary type
-of 21.
 
 Usage
 -----
@@ -105,6 +95,3 @@ References
 -  Doumith et al. Differentiation of the major *Listeria monocytogenes*
    serovars by multiplex PCR. *J Clin Microbiol*, 2004; *42:8*; 3819-22.
 
--  Huang et al. Binary typing of *Listeria monocytogenes* isolates from
-   patients and food through multiplex PCR and reverse line
-   hybridisation. SA, Australia, 2007; 136–137.
