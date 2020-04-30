@@ -69,13 +69,16 @@ setup(
     #
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
-    url="https://github.com/andersgs/lissero",  # Optional
+    url="https://github.com/MDU-PHL/lissero",  # Optional
     # This should be your name or the name of the organization which owns the
     # project.
-    author="Anders Gonçalves da Silva",  # Optional
+    author="Jason Kwong",  # Optional
     # This should be a valid email address corresponding to the author listed
     # above.
-    author_email="pandersgs@gmail.com",  # Optional
+    author_email="kwongj@gmail.com",  # Optional
+
+    maintainer="Josh Zhang",
+    maintainer_email="josh.zhang@unimelb.edu.au",
     # Classifiers help users find your project by categorizing it.
     #
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -84,7 +87,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         # Indicate who your project is intended for
         "Intended Audience :: Science/Research",
         "Intended Audience :: Healthcare Industry",
@@ -96,9 +99,6 @@ setup(
         # that you indicate whether you support Python 2, Python 3 or both.
         # These classifiers are *not* checked by 'pip install'. See instead
         # 'python_requires' below.
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
@@ -162,7 +162,7 @@ setup(
     #
     # For example, the following would provide a command called `sample` which
     # executes the function `main` from this package when invoked:
-    entry_points={"console_scripts": ["run_lissero = lissero.run_lissero:run_lissero"]},  # Optional
+    entry_points={"console_scripts": ["lissero = lissero.run_lissero:run_lissero"]},  # Optional
     # List additional URLs that are relevant to your project as a dict.
     #
     # This field corresponds to the "Project-URL" metadata fields:
@@ -173,7 +173,7 @@ setup(
     # maintainers, and where to support the project financially. The key is
     # what's used to render the link text on PyPI.
     project_urls={  # Optional
-        "Bug Reports": "https://github.com/andersgs/lissero/issues",
-        "Source": "https://github.com/andersgs/lissero/",
+        "Bug Reports": "https://github.com/MDU-PHL/lissero/issues",
+        "Source": "https://github.com/MDU-PHL/lissero/",
     },
 )
