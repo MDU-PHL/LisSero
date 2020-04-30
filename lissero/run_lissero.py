@@ -6,9 +6,9 @@ import click
 import logging
 import os
 
-from scripts.Sample import Samples
-from scripts.Blast import Blast
-from scripts.Serotype import SerotypeDB
+from lissero.scripts.Sample import Samples
+from lissero.scripts.Blast import Blast
+from lissero.scripts.Serotype import SerotypeDB
 
 
 @click.command()

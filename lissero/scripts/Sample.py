@@ -56,7 +56,7 @@ class Sample:
 
 class Samples:
 
-    SIMPLE_HEADER = ['ID', 'SEROTYPE', 'BINARYTYPE']
+    SIMPLE_HEADER = ['ID', 'SEROTYPE']
 
     def __init__(self, filenames,
                  blast,
