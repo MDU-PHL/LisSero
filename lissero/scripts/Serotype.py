@@ -104,7 +104,7 @@ class Serotype(Typing):
     This creates a decision tree.
 
     What are the possible outputs?
-        Alleles \in {'', Prs, lmo0737, lmo1118, ORF2819, ORF2110}
+        Alleles in {'', Prs, lmo0737, lmo1118, ORF2819, ORF2110}
 
     if not Prs:
         stop
