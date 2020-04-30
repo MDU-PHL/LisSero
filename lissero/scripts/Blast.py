@@ -11,7 +11,7 @@ import re
 
 class SubRunner:
 
-    version_pat = re.compile(r'(\d)\.(\d)\.(\d)')
+    version_pat = re.compile(r'(\d+)\.(\d+)\.(\d+)')
 
     def __init__(self, cmd, cmd_path=None):
         self.cmd = cmd
