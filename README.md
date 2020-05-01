@@ -1,6 +1,8 @@
 # LisSero
 
-*In silico* serogroup and binary typing prediction for *Listeria monocytogenes*
+*In silico* serogroup typing prediction for *Listeria monocytogenes*
+
+![PyPI](https://img.shields.io/pypi/v/lissero?style=flat-square) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/lissero?style=flat-square) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/lissero?style=flat-square)
 
 ## Authors
 
