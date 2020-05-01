@@ -1,6 +1,6 @@
-'''
+"""
 A class to deal with Blasting
-'''
+"""
 
 import subprocess
 import shutil
@@ -11,7 +11,7 @@ import re
 
 class SubRunner:
 
-    version_pat = re.compile(r'(\d+)\.(\d+)\.(\d+)')
+    version_pat = re.compile(r"(\d+)\.(\d+)\.(\d+)")
 
     def __init__(self, cmd, cmd_path=None):
         self.cmd = cmd
@@ -31,53 +31,48 @@ class SubRunner:
             self.cmd_list += [str(value)]
 
     def version(self):
-        self.add_option('-version')
+        self.add_option("-version")
         res = self.run()
         try:
             self.version_no = self.version_pat.findall(res.stdout)[0]
             major, minor, patch = self.version_no
         except:
-            logging.critical(f"Something went wrong when parsing the version"
-                             f" for {self.cmd}")
+            logging.critical(
+                f"Something went wrong when parsing the version" f" for {self.cmd}"
+            )
             raise SystemError
-        logging.info(f'Found {self.cmd} version {major}.{minor}.{patch}')
+        logging.info(f"Found {self.cmd} version {major}.{minor}.{patch}")
         self.cmd_list = [self.cmd_path]
 
     def is_version(self, requirement):
         pass
 
-    def run(self,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            retcode=0):
-        p = subprocess.run(self.cmd_list,
-                           stdout=stdout,
-                           stderr=stderr,
-                           encoding='utf8')
+    def run(self, stdout=subprocess.PIPE, stderr=subprocess.PIPE, retcode=0):
+        p = subprocess.run(self.cmd_list, stdout=stdout, stderr=stderr, encoding="utf8")
         if p.returncode != retcode:
             logging.critical(f"Failed to run {' '.join(self.cmd_list)}")
             raise SyntaxError
         return p
 
     def __str__(self):
-        return ' '.join(self.cmd_list)
+        return " ".join(self.cmd_list)
 
 
 class Blast(SubRunner):
     def __init__(self, blast_path=None):
-        super().__init__(cmd='blastn', cmd_path=blast_path)
+        super().__init__(cmd="blastn", cmd_path=blast_path)
         pass
 
     def add_db(self, path):
         path = os.path.realpath(path)
-        self.add_option('-db', path)
+        self.add_option("-db", path)
 
     def add_query(self, path):
         path = os.path.realpath(path)
-        self.add_option('-query', path)
+        self.add_option("-query", path)
 
 
 class MakeBlastDB(SubRunner):
     def __init__(self, makeblastdb_path=None):
-        super().__init__(cmd='makeblastdb', cmd_path=makeblastdb_path)
+        super().__init__(cmd="makeblastdb", cmd_path=makeblastdb_path)
         pass
