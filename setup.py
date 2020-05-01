@@ -92,7 +92,7 @@ setup(
         "Intended Audience :: Science/Research",
         "Intended Audience :: Healthcare Industry",
         "Topic :: Scientific/Engineering :: Bio-Informatics",
-        "Topic :: Scientific/Engineering :: Medical Science Apps",
+        "Topic :: Scientific/Engineering :: Medical Science Apps.",
         # Pick your license as you wish
         "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         # Specify the Python versions you support here. In particular, ensure
