@@ -2,3 +2,5 @@ __pycache__
 .cache
 make_rst.sh
 *egg-info
+build
+dist
