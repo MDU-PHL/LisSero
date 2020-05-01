@@ -5,7 +5,11 @@
 ## Authors
 
 *   Jason Kwong (@kwongjc) - GitHub: [kwongj](https://github.com/kwongj)  
-*   Torsten Seemann (@torstenseemann) - GitHub: [tseemann](https://github.com/tseemann)  
+*   Torsten Seemann (@torstenseemann) - GitHub: [tseemann](https://github.com/tseemann)
+
+## Maintainers
+
+* MDU PHL - Josh Zhang, Kristy Horan, and Anders Gonçalves da Silva
 
 ## Dependencies
 
@@ -52,7 +56,30 @@ LisSero reports these as "Nontypable".
 
 ## Usage
 
+```
+$ lissero --help
 
+Usage: lissero [OPTIONS] FASTA...
+
+  In silico serogroup prediction for L. monocytogenes. Alleles: lmo1118,
+  lmo0737, ORF2819, ORF2110, Prs
+
+  References:
+
+  * Doumith et al. Differentiation of the major Listeria monocytogenes
+  serovars by multiplex PCR. J Clin Microbiol, 2004; 42:8; 3819-22
+
+Options:
+  -s, --serotype_db TEXT
+  --min_id FLOAT          Minimum percent identity to accept a match. [0-100]
+                          [default: 95.0]
+
+  --min_cov FLOAT         Minimum coverage of the gene to accept a match.
+                          [0-100]  [default: 95.0]
+
+  --debug
+  --help    
+```
 
 ## Bugs
 Please submit via the GitHub issues page: [https://github.com/MDU-PHL/LisSero/issues](https://github.com/MDU-PHL/LisSero/issues)  
