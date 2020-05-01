@@ -21,7 +21,7 @@ from .Serotype import SerotypeDB
 @click.option("--sg_min_id", default=95)
 @click.option("--sg_min_cov", default=95)
 @click.option("--debug", is_flag=True)
-@click.argument("fasta", nargs=-1)
+@click.argument("fasta", nargs=-1,  required=True)
 def run_lissero(serotype_db, binarytype_db,
                 sg_min_id, sg_min_cov,
                 bt_min_id, bt_min_cov,
