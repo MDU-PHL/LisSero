@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6036bcae6281956c0aaf5a28ffb0b2c1a086d74589b04442ce5a35a51918f186"
+            "sha256": "96aa2e56c679f335243ad678d64e2fd5fca96a459a357b5738532056d40a934a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -24,6 +24,10 @@
             "version": "==7.1.2"
         },
         "e1839a8": {
+            "editable": true,
+            "path": "."
+        },
+        "lissero": {
             "editable": true,
             "path": "."
         }
