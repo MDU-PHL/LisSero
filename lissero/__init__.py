@@ -1,5 +1,5 @@
-'''
+"""
 A tool to perform Listeria Serotyping and Binary Typing
-'''
+"""
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
