@@ -11,6 +11,11 @@ from lissero.scripts.Blast import Blast
 from lissero.scripts.Serotype import SerotypeDB
 from .__init__ import __version__ as version
 
+def print_version(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    click.echo(f"LisSero {version}")
+    ctx.exit()
 
 @click.command()
 @click.option("-s", "--serotype_db", default=None, envvar="LISSERO_DB")
@@ -30,14 +35,7 @@ from .__init__ import __version__ as version
 @click.argument("fasta", nargs=-1, type=click.Path(), required=True)
 #fix Version Issue #10
 @click.option("--version", is_flag=True, callback=print_version, \
-              expose_value=False, is_eager=True)
-
-def print_version(ctx, param, value):
-    if not value or ctx.resilient_parsing:
-        return
-    click.echo(f"LisSero {version}")
-    ctx.exit()
-
+              expose_value=False, is_eager=True, help="Show Version Information")
 
 def run_lissero(serotype_db, min_id, min_cov, debug, fasta):
 
