@@ -9,6 +9,7 @@ import os
 from lissero.scripts.Sample import Samples
 from lissero.scripts.Blast import Blast
 from lissero.scripts.Serotype import SerotypeDB
+from .__init__ import __version__ as version
 
 
 @click.command()
@@ -27,6 +28,19 @@ from lissero.scripts.Serotype import SerotypeDB
 )
 @click.option("--debug", is_flag=True)
 @click.argument("fasta", nargs=-1, type=click.Path(), required=True)
+#fix Version Issue #10
+@click.option("--version", is_flag=True, callback=print_version, \
+              expose_value=False, is_eager=True)
+
+def print_version(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    click.echo(f"LisSero {version}")
+    ctx.exit()
+
+def check_fasta(m_fasta):
+
+
 def run_lissero(serotype_db, min_id, min_cov, debug, fasta):
 
     """
@@ -44,7 +58,12 @@ def run_lissero(serotype_db, min_id, min_cov, debug, fasta):
     else:
         log_level = logging.INFO
     logging.basicConfig(level=log_level)
-    path_serodb = os.path.realpath(serotype_db)
+    #fix issue #11 and #12
+    path_serodb = ""
+    try:
+        path_serodb = os.path.realpath(serotype_db)
+    except:
+        logging.error(f"Please provide a correct serotype db path or set correct PATH for LISSERO_DB")
     sero_db = SerotypeDB(path_db=path_serodb, db_type="serotype")
     sero_db.check_db()
     blast = Blast()
