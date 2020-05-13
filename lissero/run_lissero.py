@@ -38,8 +38,6 @@ def print_version(ctx, param, value):
     click.echo(f"LisSero {version}")
     ctx.exit()
 
-def check_fasta(m_fasta):
-
 
 def run_lissero(serotype_db, min_id, min_cov, debug, fasta):
 
