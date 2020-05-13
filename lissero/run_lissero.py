@@ -60,6 +60,7 @@ def run_lissero(serotype_db, min_id, min_cov, debug, fasta):
         path_serodb = os.path.realpath(serotype_db)
     except:
         logging.error(f"Please provide a correct serotype db path or set correct PATH for LISSERO_DB")
+        sys.exit()
     sero_db = SerotypeDB(path_db=path_serodb, db_type="serotype")
     sero_db.check_db()
     blast = Blast()
