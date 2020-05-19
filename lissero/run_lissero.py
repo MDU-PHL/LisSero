@@ -53,7 +53,7 @@ def run_lissero(serotype_db, min_id, min_cov, debug, fasta):
         log_level = logging.DEBUG
     else:
         log_level = logging.INFO
-    logging.basicConfig(level=log_level)
+    logging.basicConfig(filename='./lissero.log', level=log_level)
     #fix issue #11 and #12
     path_serodb = ""
     try:

@@ -51,6 +51,7 @@ class Typing:
     def _blast_parse(self):
         self.full_matches = set()
         self.partial_matches = set()
+        logging.info(self.blast_res.stdout.strip())
         blast_matches = self.blast_res.stdout.strip().split("\n")
         for b in blast_matches:
             (qaccver, saccver, length, slen, pident) = b.split("\t")
