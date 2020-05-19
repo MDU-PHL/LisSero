@@ -48,6 +48,7 @@ class SubRunner:
         pass
 
     def run(self, stdout=subprocess.PIPE, stderr=subprocess.PIPE, retcode=0):
+        logging.info("Blastn is running: " + ' '.join(self.cmd_list))
         p = subprocess.run(self.cmd_list, stdout=stdout, stderr=stderr, encoding="utf8")
         if p.returncode != retcode:
             logging.critical(f"Failed to run {' '.join(self.cmd_list)}")
