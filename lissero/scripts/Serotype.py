@@ -19,7 +19,7 @@ from .Blast import MakeBlastDB
 
 SEROTYPE_FASTA = "db/sequences.fasta"
 # BINARYTYPE_FASTA = 'db/binary_sequences.fasta'
-def report_maker(self, query, full_matches, partial_matches)
+def report_maker(full_matches, partial_matches=[])
     report = {
         "prs": None,
         "lmo0737": None,
