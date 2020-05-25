@@ -74,7 +74,32 @@ def test_seq_against_sero_db(make_sero_db):
     (["PRS", "LMO0737", "LMO1118"], "1/2c, 3c"),
     (["PRS", "ORF2819", "ORF2110"], "4b, 4d, 4e"),
     (["PRS", "ORF2110", "ORF2819", "LMO0737"], "4b, 4d, 4e*"),
-    ([], "Nontypeable")
+    ([], "Nontypeable"), #other
+    (['LMO0737'], "Nontypeable"),
+    (['LMO1118'], "Nontypeable"),
+    (['PRS', 'LMO1118'], "Nontypeable"),
+    (['LMO0737', 'LMO1118'], "Nontypeable"),
+    (['ORF2819'], "Nontypeable"),
+    (['LMO0737', 'ORF2819'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'ORF2819'], "Nontypeable"),
+    (['LMO1118', 'ORF2819'], "Nontypeable"),
+    (['PRS', 'LMO1118', 'ORF2819'], "Nontypeable"),
+    (['LMO0737', 'LMO1118', 'ORF2819'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'LMO1118', 'ORF2819'], "Nontypeable"),
+    (['ORF2110'], "Nontypeable"),
+    (['PRS', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'ORF2110'], "Nontypeable"),
+    (['LMO1118', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO1118', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'LMO1118', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'LMO1118', 'ORF2110'], "Nontypeable"),
+    (['ORF2819', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable")
     ],
     )
 def test_report_maker(test_input, expected):
