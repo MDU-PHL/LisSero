@@ -73,7 +73,7 @@ def test_seq_against_sero_db(make_sero_db):
     ],
     )
 def test_report_maker(test_input, expected):
-    serotype = reprot_maker(test_input)["serotype"]
+    serotype = report_maker(test_input)["serotype"]
     assert serotype == expected
 
 """
