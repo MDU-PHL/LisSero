@@ -2,6 +2,7 @@ import pytest
 import os
 from lissero.scripts.Serotype import SerotypeDB
 from lissero.scripts.Serotype import Serotype
+from lissero.scripts.Serotype import report_maker
 #from lissero.Serotype import BinaryType
 from lissero.scripts.Blast import Blast
 
@@ -65,6 +66,15 @@ def test_seq_against_sero_db(make_sero_db):
     serotype = Serotype(blast, db)
     serotype.generate_type(test_1)
     assert {'ORF2110', 'ORF2819', 'PRS'} == serotype.full_matches
+
+@pytest.mark.parametrize("test_input, expected",
+    [(["PRS"], "Nontypeable"), 
+    ([], "Nontypeable")
+    ],
+    )
+def test_report_maker(test_input, expected):
+    serotype = reprot_maker(test_input)["serotype"]
+    assert serotype == expected
 
 """
 test bt db
