@@ -69,6 +69,11 @@ def test_seq_against_sero_db(make_sero_db):
 
 @pytest.mark.parametrize("test_input, expected",
     [(["PRS"], "Nontypeable"), 
+    (["PRS", "LMO0737"], "1/2a, 3a"),
+    (["PRS", "ORF2819"], "1/2b, 3b, 7"),
+    (["PRS", "LMO0737", "LMO1118"], "1/2c, 3c"),
+    (["PRS", "ORF2819", "ORF2110"], "4b, 4d, 4e"),
+    (["PRS", "ORF2110", "ORF2819", "LMO0737"], "4b, 4d, 4e*"),
     ([], "Nontypeable")
     ],
     )
