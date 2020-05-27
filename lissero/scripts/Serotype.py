@@ -64,13 +64,16 @@ def report_maker(full_matches, partial_matches=[]):
         and "ORF2819" in full_matches
         and "ORF2110" in full_matches
     ):
-        report["serotype"] = "4b, 4d, 4e*"
-        report["comment"] = "Unusual 4b with lmo0737"
+        if "LMO1118" in full_matches:
+            report["serotype"] = "Nontypeable"
+            report["comment"] = "Presence of all 5 genes, No a Known Serotype"
+        else:
+            report["serotype"] = "4b, 4d, 4e*"
+            report["comment"] = "Unusual 4b with lmo0737"
     else:
         report["serotype"] = "Nontypeable"
-        report["comment"] = (
-            "No combination of fully matched genes" " resulted in a known serotype."
-        )
+        report["comment"] = 
+            "No combination of fully matched genes resulted in a known serotype"
     #report["id"] = query
     #report["db_version"] = self.db_version()
         #self.report = report
