@@ -72,8 +72,7 @@ def report_maker(full_matches, partial_matches=[]):
             report["comment"] = "Unusual 4b with lmo0737"
     else:
         report["serotype"] = "Nontypeable"
-        report["comment"] = 
-            "No combination of fully matched genes resulted in a known serotype"
+        report["comment"] = "No combination of fully matched genes resulted in a known serotype"
     #report["id"] = query
     #report["db_version"] = self.db_version()
         #self.report = report
