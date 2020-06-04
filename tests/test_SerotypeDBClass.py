@@ -2,6 +2,7 @@ import pytest
 import os
 from lissero.scripts.Serotype import SerotypeDB
 from lissero.scripts.Serotype import Serotype
+from lissero.scripts.Serotype import report_maker
 #from lissero.Serotype import BinaryType
 from lissero.scripts.Blast import Blast
 
@@ -65,6 +66,45 @@ def test_seq_against_sero_db(make_sero_db):
     serotype = Serotype(blast, db)
     serotype.generate_type(test_1)
     assert {'ORF2110', 'ORF2819', 'PRS'} == serotype.full_matches
+
+@pytest.mark.parametrize("test_input, expected",
+    [(["PRS"], "Nontypeable"), 
+    (["PRS", "LMO0737"], "1/2a, 3a"),
+    (["PRS", "ORF2819"], "1/2b, 3b, 7"),
+    (["PRS", "LMO0737", "LMO1118"], "1/2c, 3c"),
+    (["PRS", "ORF2819", "ORF2110"], "4b, 4d, 4e"),
+    (["PRS", "ORF2110", "ORF2819", "LMO0737"], "4b, 4d, 4e*"),
+    ([], "Nontypeable"), #other
+    (['LMO0737'], "Nontypeable"),
+    (['LMO1118'], "Nontypeable"),
+    (['PRS', 'LMO1118'], "Nontypeable"),
+    (['LMO0737', 'LMO1118'], "Nontypeable"),
+    (['ORF2819'], "Nontypeable"),
+    (['LMO0737', 'ORF2819'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'ORF2819'], "Nontypeable"),
+    (['LMO1118', 'ORF2819'], "Nontypeable"),
+    (['PRS', 'LMO1118', 'ORF2819'], "Nontypeable"),
+    (['LMO0737', 'LMO1118', 'ORF2819'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'LMO1118', 'ORF2819'], "Nontypeable"),
+    (['ORF2110'], "Nontypeable"),
+    (['PRS', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'ORF2110'], "Nontypeable"),
+    (['LMO1118', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO1118', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'LMO1118', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'LMO1118', 'ORF2110'], "Nontypeable"),
+    (['ORF2819', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['LMO0737', 'LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable"),
+    (['PRS', 'LMO0737', 'LMO1118', 'ORF2819', 'ORF2110'], "Nontypeable")
+    ],
+    )
+def test_report_maker(test_input, expected):
+    serotype = report_maker(test_input)["serotype"]
+    assert serotype == expected
 
 """
 test bt db

@@ -57,7 +57,7 @@ class Sample:
 
 class Samples:
 
-    SIMPLE_HEADER = ["ID", "SEROTYPE"]
+    SIMPLE_HEADER = ["ID", "SEROTYPE", "PRS", "LMO0737", "LMO1118", "ORF2110", "ORF2819", "COMMENT"]
 
     def __init__(
         self,
@@ -113,9 +113,17 @@ class Samples:
         for sample in self.samples:
             sample_id = sample.serotype.report["id"]
             serotype = sample.serotype.report["serotype"]
+            prs = sample.serotype.report["prs"]
+            lmo0737 = sample.serotype.report["lmo0737"]
+            lmo1118 = sample.serotype.report["lmo1118"]
+            orf2110 = sample.serotype.report["orf2110"]
+            orf2819 = sample.serotype.report["orf2819"]
+            comment = sample.serotype.report["comment"]
+            if comment == None:
+                comment = ""
             # binarytype = sample.binarytype.report['binarytype']
             # print('\t'.join([sample_id, serotype, binarytype]))
-            print("\t".join([sample_id, serotype]))
+            print("\t".join([sample_id, serotype, prs, lmo0737, lmo1118, orf2110, orf2819, comment]))
 
     def __str__(self):
         return f"Typing {len(self.filenames)} samples"

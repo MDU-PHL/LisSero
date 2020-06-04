@@ -19,7 +19,65 @@ from .Blast import MakeBlastDB
 
 SEROTYPE_FASTA = "db/sequences.fasta"
 # BINARYTYPE_FASTA = 'db/binary_sequences.fasta'
-
+def report_maker(full_matches, partial_matches=[]):
+    report = {
+        "prs": None,
+        "lmo0737": None,
+        "lmo1118": None,
+        "orf2110": None,
+        "orf2819": None,
+    }
+    for gene in report:
+        if gene.upper() in full_matches:
+            report[gene] = "FULL"
+        elif gene.upper() in partial_matches:
+            report[gene] = "PARTIAL"
+        else:
+            report[gene] = "NONE"
+    if "PRS" not in full_matches:
+        report["serotype"] = "Nontypeable"
+        report["comment"] = "No Prs found"
+    elif (
+        "LMO0737" in full_matches
+        and "ORF2819" not in full_matches
+        and "ORF2110" not in full_matches
+    ):
+        if "LMO1118" in full_matches:
+            report["serotype"] = "1/2c, 3c"
+            report["comment"] = None
+        else:
+            report["serotype"] = "1/2a, 3a"
+            report["comment"] = None
+    elif (
+        "ORF2819" in full_matches
+        and "LMO0737" not in full_matches
+        and "LMO1118" not in full_matches
+    ):
+        if "ORF2110" in full_matches:
+            report["serotype"] = "4b, 4d, 4e"
+            report["comment"] = None
+        else:
+            report["serotype"] = "1/2b, 3b, 7"
+            report["comment"] = None
+    elif (
+        "LMO0737" in full_matches
+        and "ORF2819" in full_matches
+        and "ORF2110" in full_matches
+    ):
+        if "LMO1118" in full_matches:
+            report["serotype"] = "Nontypeable"
+            report["comment"] = "Presence of all 5 genes, No a Known Serotype"
+        else:
+            report["serotype"] = "4b, 4d, 4e*"
+            report["comment"] = "Unusual 4b with lmo0737"
+    else:
+        report["serotype"] = "Nontypeable"
+        report["comment"] = "No combination of fully matched genes resulted in a known serotype"
+    #report["id"] = query
+    #report["db_version"] = self.db_version()
+        #self.report = report
+    logging.debug(report)
+    return report
 
 class Typing:
 
@@ -150,6 +208,7 @@ class Serotype(Typing):
                 self.partial_matches.update([saccver.split("~~")[0].upper()])
 
     def generate_type(self, query):
+        """
         report = {
             "prs": None,
             "lmo0737": None,
@@ -157,57 +216,18 @@ class Serotype(Typing):
             "orf2110": None,
             "orf2819": None,
         }
+        """
         self.blast.add_query(query)
         self._blast_run()
         self._blast_parse()
-        for gene in report:
-            if gene.upper() in self.full_matches:
-                report[gene] = "FULL MATCH"
-            elif gene.upper() in self.partial_matches:
-                report[gene] = "PARTIAL MATCH"
-            else:
-                report[gene] = "NOT FOUND"
-        if "PRS" not in self.full_matches:
-            report["serotype"] = "Nontypable"
-            report["comment"] = "No Prs found"
-        elif (
-            "LMO0737" in self.full_matches
-            and "ORF2819" not in self.full_matches
-            and "ORF2110" not in self.full_matches
-        ):
-            if "LMO1118" in self.full_matches:
-                report["serotype"] = "1/2c, 3c"
-                report["comment"] = None
-            else:
-                report["serotype"] = "1/2a, 3a"
-                report["comment"] = None
-        elif (
-            "ORF2819" in self.full_matches
-            and "LMO0737" not in self.full_matches
-            and "LMO1118" not in self.full_matches
-        ):
-            if "ORF2110" in self.full_matches:
-                report["serotype"] = "4b, 4d, 4e"
-                report["comment"] = None
-            else:
-                report["serotype"] = "1/2b, 3b, 7"
-                report["comment"] = None
-        elif (
-            "LMO0737" in self.full_matches
-            and "ORF2819" in self.full_matches
-            and "ORF2110" in self.full_matches
-        ):
-            report["serotype"] = "4b, 4d, 4e*"
-            report["comment"] = "Unusual 4b with lmo0737"
-        else:
-            report["serotype"] = "Nontypable"
-            report["comment"] = (
-                "No combination of fully matched genes" " resulted in a known serotype."
-            )
+    #Change function structure to implement pytest
+        report = report_maker(self.full_matches, self.partial_matches)
         report["id"] = query
         report["db_version"] = self.db_version()
         self.report = report
-        logging.debug(report)
+
+
+    
 
 
 # delete BT
