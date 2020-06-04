@@ -68,7 +68,7 @@ def report_maker(full_matches, partial_matches=[]):
     ):
         if "LMO1118" in full_matches:
             report["serotype"] = "Nontypeable"
-            report["comment"] = "Presence of all 5 genes, No a Known Serotype"
+            report["comment"] = "Presence of all 5 genes, not a known serotype"
         else:
             report["serotype"] = "4b, 4d, 4e*"
             report["comment"] = "Unusual 4b with lmo0737"
