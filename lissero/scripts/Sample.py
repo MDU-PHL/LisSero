@@ -8,8 +8,6 @@ from loguru import logger
 
 from .Serotype import Serotype
 
-# from .Serotype import BinaryType
-
 
 class Sample:
     def __init__(
@@ -19,19 +17,10 @@ class Sample:
         sero_db,
         sg_min_id,
         sg_min_cov,
-        # bt_db,
-        # bt_min_id,
-        # bt_min_cov
     ):
         self.id = filename
         self.filename = os.path.realpath(filename)
         self.serotype = Serotype(blast, sero_db, pid=sg_min_id, cov=sg_min_cov)
-        """
-        self.binarytype = BinaryType(blast,
-                                     bt_db,
-                                     pid=bt_min_id,
-                                     cov=bt_min_cov)
-        """
 
     def is_fasta(self):
         pass
@@ -40,17 +29,10 @@ class Sample:
         logger.info(f"Serotyping: {self.id}")
         self.serotype.generate_type(self.filename)
 
-    """
-    def get_binarytype(self):
-        logging.info(f'Binary Typing: {self.id}')
-        self.binarytype.generate_type(self.filename)
-    """
-
     def __str__(self):
         try:
-            string = (
-                f"{self.id}" f"\tSEROTYPE: {self.serotype.report['serotype']}"
-            )  # f"\tBINARYTYPE: {self.binarytype.report['binarytype']}"
+            string = f"{self.id} " \
+                     f"\tSEROTYPE: {self.serotype.report['serotype']}"
         except:
             string = ""
         return string
@@ -67,18 +49,12 @@ class Samples:
         sero_db,
         sg_min_id,
         sg_min_cov,
-        # bt_db,
-        # bt_min_id,
-        # bt_min_cov
     ):
         self.filenames = filenames
         self.blast = blast
         self.sero_db = sero_db
-        # self.bt_db = bt_db
         self.sg_min_id = sg_min_id
         self.sg_min_cov = sg_min_cov
-        # self.bt_min_id = bt_min_id
-        # self.bt_min_cov = bt_min_cov
 
     def _create_sample(self):
         self.samples = []
@@ -92,9 +68,6 @@ class Samples:
                     sg_min_cov=self.sg_min_cov,
                 )
             ]
-            # bt_db=self.bt_db,
-            # bt_min_id=self.bt_min_id,
-            # bt_min_cov=self.bt_min_cov
 
     def _run_typing(self, func):
         if func == "serotype":
@@ -107,7 +80,6 @@ class Samples:
     def run_typing(self):
         self._create_sample()
         self._run_typing("serotype")
-        # self._run_typing("binarytype")
 
     def simple_report(self, header=True):
         print("\t".join(self.SIMPLE_HEADER))
@@ -122,8 +94,6 @@ class Samples:
             comment = sample.serotype.report["comment"]
             if comment is None:
                 comment = ""
-            # binarytype = sample.binarytype.report['binarytype']
-            # print('\t'.join([sample_id, serotype, binarytype]))
             print("\t".join([sample_id, serotype, prs, lmo0737, lmo1118, orf2110, orf2819, comment]))
 
     def __str__(self):
