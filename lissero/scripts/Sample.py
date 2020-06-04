@@ -120,7 +120,7 @@ class Samples:
             orf2110 = sample.serotype.report["orf2110"]
             orf2819 = sample.serotype.report["orf2819"]
             comment = sample.serotype.report["comment"]
-            if comment == None:
+            if comment is None:
                 comment = ""
             # binarytype = sample.binarytype.report['binarytype']
             # print('\t'.join([sample_id, serotype, binarytype]))
