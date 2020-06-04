@@ -10,6 +10,8 @@ pytest = "*"
 [packages]
 e1839a8 = {editable = true,path = "."}
 lissero = {editable = true,path = "."}
+loguru = "*"
+biopython = "*"
 
 [requires]
 python_version = "3.7"
