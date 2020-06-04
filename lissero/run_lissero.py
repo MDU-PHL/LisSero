@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # Script by Jason Kwong
 # In silico serotyping for L.monocytogenes
-
-import click
+import sys
 import logging
 import os
 
