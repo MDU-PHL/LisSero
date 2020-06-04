@@ -3,7 +3,8 @@ A sample class for LisSero
 """
 
 import os
-import logging
+
+from loguru import logger
 
 from .Serotype import Serotype
 
@@ -36,7 +37,7 @@ class Sample:
         pass
 
     def get_serotype(self):
-        logging.info(f"Serotyping: {self.id}")
+        logger.info(f"Serotyping: {self.id}")
         self.serotype.generate_type(self.filename)
 
     """
@@ -100,7 +101,7 @@ class Samples:
             for f in self.samples:
                 f.get_serotype()
         else:
-            logging.critical(f"Unknown function {func}")
+            logger.critical(f"Unknown function {func}")
             raise RuntimeError
 
     def run_typing(self):

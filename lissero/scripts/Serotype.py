@@ -5,7 +5,6 @@ All Serotyping logic stays here.
 """
 
 import os
-import logging
 import json
 import datetime
 import getpass
@@ -13,6 +12,8 @@ import hashlib
 import shlex
 import copy
 import pkg_resources
+
+from loguru import logger
 
 from .Blast import MakeBlastDB
 
@@ -76,7 +77,7 @@ def report_maker(full_matches, partial_matches=[]):
     #report["id"] = query
     #report["db_version"] = self.db_version()
         #self.report = report
-    logging.debug(report)
+    logger.debug(report)
     return report
 
 class Typing:
@@ -109,7 +110,7 @@ class Typing:
     def _blast_parse(self):
         self.full_matches = set()
         self.partial_matches = set()
-        logging.info(self.blast_res.stdout.strip())
+        logger.info(self.blast_res.stdout.strip())
         blast_matches = self.blast_res.stdout.strip().split("\n")
         for b in blast_matches:
             (qaccver, saccver, length, slen, pident) = b.split("\t")
@@ -419,7 +420,7 @@ class SerotypeDB:
         # elif db_type == 'binary_type':
         # self.infile = pkg_resources.resource_filename('lissero', BINARYTYPE_FASTA)
         else:
-            logging.critical(f"I don't understand db_type = {db_type}")
+            logger.critical(f"I don't understand db_type = {db_type}")
             raise IOError
         self.force = force
         self.log_file = os.path.join(self.path_db, db_name + "_db.json")
@@ -427,15 +428,15 @@ class SerotypeDB:
 
     def check_db(self):
         if self.force and self.infile is not None:
-            logging.info("Will rebuild database if one exists!")
+            logger.info("Will rebuild database if one exists!")
             self._make_db()
             return
         elif os.path.exists(self.db_name + ".nhr"):
             self._load_log()
-            logging.info(f"DB was created on {self.db_log['date_created']}")
-            logging.info("DB is ready for use.")
+            logger.info(f"DB was created on {self.db_log['date_created']}")
+            logger.info("DB is ready for use.")
         elif self.infile is None:
-            logging.critical(
+            logger.critical(
                 "There is no database, and I don't"
                 " have enough information to create one."
                 " Please add an input file for the DB"
@@ -443,8 +444,8 @@ class SerotypeDB:
             )
             raise IOError
         else:
-            logging.warning(f"Did not find a DB at {self.path_db}")
-            logging.warning("Will create a new one")
+            logger.warning(f"Did not find a DB at {self.path_db}")
+            logger.warning("Will create a new one")
             self._make_db()
 
     def __str__(self):
@@ -457,15 +458,15 @@ class SerotypeDB:
         if os.path.exists(self.log_file):
             fh = open(self.log_file, "rt")
             self.db_log = json.load(fh)
-            logging.info("Successfully loaded DB log!")
+            logger.info("Successfully loaded DB log!")
             fh.close()
         else:
-            logging.warning("Did find a log file at {self.path_db}")
+            logger.warning("Did find a log file at {self.path_db}")
 
     def _save_log(self):
         fh = open(self.log_file, "wt")
         json.dump(self.db_log, fh, indent=4)
-        logging.info("Successfully saved log!")
+        logger.info("Successfully saved log!")
 
     def _hash_file(self, filename):
         f = open(filename, "rb")
@@ -491,4 +492,4 @@ class SerotypeDB:
         self.db_log["infile"]["sha256"] = self._hash_file(self.infile)
         self.db_log["title"] = self.title
         self._save_log()
-        logging.info(f"Successfully created {self.db_name}")
+        logger.info(f"Successfully created {self.db_name}")

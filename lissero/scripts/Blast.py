@@ -4,9 +4,10 @@ A class to deal with Blasting
 
 import subprocess
 import shutil
-import logging
 import os
 import re
+
+from loguru import logger
 
 
 class SubRunner:
@@ -20,8 +21,8 @@ class SubRunner:
         else:
             self.cmd_path = shutil.which(self.cmd)
             if self.cmd_path is None:
-                logging.critical(f"Could not find executable {self.cmd}")
-                logging.critical("Please provide a path to the executable.")
+                logger.critical(f"Could not find executable {self.cmd}")
+                logger.critical("Please provide a path to the executable.")
                 raise SystemError
         self.cmd_list = [self.cmd_path]
 
@@ -37,21 +38,21 @@ class SubRunner:
             self.version_no = self.version_pat.findall(res.stdout)[0]
             major, minor, patch = self.version_no
         except:
-            logging.critical(
+            logger.critical(
                 f"Something went wrong when parsing the version" f" for {self.cmd}"
             )
             raise SystemError
-        logging.info(f"Found {self.cmd} version {major}.{minor}.{patch}")
+        logger.info(f"Found {self.cmd} version {major}.{minor}.{patch}")
         self.cmd_list = [self.cmd_path]
 
     def is_version(self, requirement):
         pass
 
     def run(self, stdout=subprocess.PIPE, stderr=subprocess.PIPE, retcode=0):
-        logging.info("Blastn is running: " + ' '.join(self.cmd_list))
+        logger.info("Blastn is running: " + ' '.join(self.cmd_list))
         p = subprocess.run(self.cmd_list, stdout=stdout, stderr=stderr, encoding="utf8")
         if p.returncode != retcode:
-            logging.critical(f"Failed to run {' '.join(self.cmd_list)}")
+            logger.critical(f"Failed to run {' '.join(self.cmd_list)}")
             raise SyntaxError
         return p
 
