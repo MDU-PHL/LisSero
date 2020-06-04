@@ -7,7 +7,7 @@
 ## Authors
 
 *   Jason Kwong (@kwongjc) - GitHub: [kwongj](https://github.com/kwongj)  
-*   Josh Zhang (@abcdtree)  - GitHubL [abcdtree](https://github.com/abcdtree)
+*   Josh Zhang (@abcdtree)  - GitHub: [abcdtree](https://github.com/abcdtree)
 *   Torsten Seemann (@torstenseemann) - GitHub: [tseemann](https://github.com/tseemann)
 
 ## Maintainers
@@ -108,11 +108,11 @@ The output consist of 8 columns:
 * Five columns for each of the genes with either:
     - `FULL`: for a complete match to the gene in the database (as defined by the `--min_cov` and `--min_id` flags
         which default to at least 95% coverage and percent id)
-    - `NONE`: with no match to the database
-    - `PARTIAL`: with there are matches that fall below the `--min_cov` and `--min_id` thresholds
+    - `NONE`: when there is no match to the database
+    - `PARTIAL`: where there are matches that fall below the `--min_cov` and `--min_id` thresholds
  * COMMENTS: Which will try to explain a `Nontypeable` results. Current cases are:
     - `No Prs found`: when there is no `FULL` match to the `Prs` gene is not likely to be a *Listeria monocytogenes*
-    - `Presence of all 5 genes, No a Known Serotype`: when all 5 genes are present
+    - `Presence of all 5 genes, not a known serotype`: when all 5 genes are present
     - `No combination of fully matched genes resulted in a known serotype`: An unknown combination
     - In addition, it will say `Unusual 4b with lmo0737` when reporting `4b, 4d, 4e*` serotype
 
