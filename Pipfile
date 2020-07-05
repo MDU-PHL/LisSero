@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 e1839a8 = {path = "."}
 pytest = "*"
+pipenv-setup = "*"
 
 [packages]
 e1839a8 = {editable = true,path = "."}
@@ -15,3 +16,6 @@ biopython = "*"
 
 [requires]
 python_version = "3.7"
+
+[scripts]
+sync = 'pipenv-setup sync'
