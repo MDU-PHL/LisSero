@@ -26,19 +26,19 @@ jobs:
         channels: conda-forge, bioconda
         activate-environment: lissero
     - name: Install conda dependencies
-      shell: bash
+      shell: bash -l {0}
       run: |
         conda install blast
     - name: Install LisSero dependencies
-      shell: bash
+      shell: bash -l {0}
       run: |
         conda env list
         which python
         which python3
         which pip
         which pip3
-        conda install pip setuptools flake8 pytest
-        pip3 install .
+        conda install flake8 pytest
+        pip install .
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
