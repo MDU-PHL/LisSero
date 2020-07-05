@@ -30,10 +30,10 @@ def is_fasta(filename):
     This is the best I could come up with. If the
     file is empty or does not contain any FASTA records
     the parser will return an empty generator which will
-    return false in `any(gen)`.
+    return a StopIteration exception when running `next(gen)`.
     But, there is another case where the file starts with
     a `>`, and thus the generator works, but it returns an
-    empty record, thus the `and len(next(gen)) > 0.
+    empty record, thus the `len(rec)) > 0.
 
     Args:
         filename: FASTA input name
