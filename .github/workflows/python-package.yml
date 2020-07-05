@@ -29,6 +29,10 @@ jobs:
         conda install blast
     - name: Install dependencies
       run: |
+        which python
+        which python3
+        which pip
+        which pip3
         conda install pip setuptools flake8 pytest
         pip3 install .
     - name: Lint with flake8
