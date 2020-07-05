@@ -76,7 +76,6 @@ setup(
     # This should be a valid email address corresponding to the author listed
     # above.
     author_email="kwongj@gmail.com",  # Optional
-
     maintainer="Josh Zhang",
     maintainer_email="josh.zhang@unimelb.edu.au",
     # Classifiers help users find your project by categorizing it.
@@ -130,7 +129,12 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=["click", "setuptools"],  # Optional
+    install_requires=[
+        "biopython==1.77",
+        "click==7.1.2",
+        "loguru==0.5.1",
+        "numpy==1.19.0",
+    ],  # Optional
     # List additional groups of dependencies here (e.g. development
     # dependencies). Users will be able to install these using the "extras"
     # syntax, for example:
@@ -162,7 +166,9 @@ setup(
     #
     # For example, the following would provide a command called `sample` which
     # executes the function `main` from this package when invoked:
-    entry_points={"console_scripts": ["lissero = lissero.run_lissero:run_lissero"]},  # Optional
+    entry_points={
+        "console_scripts": ["lissero = lissero.run_lissero:run_lissero"]
+    },  # Optional
     # List additional URLs that are relevant to your project as a dict.
     #
     # This field corresponds to the "Project-URL" metadata fields:
