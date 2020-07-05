@@ -24,11 +24,15 @@ jobs:
         auto-update-conda: true
         python-version: ${{ matrix.python-version }}
         channels: conda-forge, bioconda
+        activate-environment: lissero
     - name: Install conda dependencies
+      shell: bash
       run: |
         conda install blast
-    - name: Install dependencies
+    - name: Install LisSero dependencies
+      shell: bash
       run: |
+        conda env list
         which python
         which python3
         which pip
