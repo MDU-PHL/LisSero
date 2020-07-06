@@ -25,10 +25,14 @@ jobs:
         python-version: ${{ matrix.python-version }}
         channels: conda-forge, bioconda
         activate-environment: lissero
+    - name: Install BLAST
+      shell: bash -l {0}
+      run: |
+        conda install blast
     - name: Install LisSero and dependencies
       shell: bash -l {0}
       run: |
-        conda install blast flake8 pytest
+        conda install flake8 pytest
         pip install .
     - name: Lint with flake8
       shell: bash -l {0}
