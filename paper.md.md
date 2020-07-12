@@ -8,9 +8,9 @@ tags:
   - microbial genomics
   - Listeria
 authors:
-  - name: Jason Kwong^[Custom footnotes for e.g. denoting who the corresspoinding author is can be included like this.]
+  - name: Jason Kwong^[Corresponding author]
     orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
+    affiliation: "1, 2"
   - name: Josh Zhang
     affiliation: 2
   - name: Kristy A. Horan
@@ -26,9 +26,9 @@ authors:
    - name: Timothy P. Stinear
      affiliation: 3
    - name: Benjamin P. Howden
-     affiliation: 2, 3
-   - name: Torsten Seemann
-     affiliation: 2, 3
+     affiliation: "2, 3"
+   - name: Torsten Seemann^[Corresponding author]
+     affiliation: "2, 3"
 affiliations:
  - name: Austin Health
    index: 1
@@ -127,5 +127,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyNzM2NjQzNl19
+eyJoaXN0b3J5IjpbLTExMTg2MzUzODUsMTMyNzM2NjQzNl19
 -->
