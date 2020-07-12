@@ -45,7 +45,9 @@ bibliography: paper.bib
 
 One of the corner stones of transition to genomics in public health are Bioinformatic
 tools to assist in replicating wet lab processes using whole-genome sequence data. A 
-number of tools have been written to carry out 
+number of tools have been written to carry out various bacterial sub-typing techniques, 
+such as multi-locus sequence typing, and various types of phenotypic serotype inferences
+(e.g., *Salmonella* serotyping). Here we 
 
 # Statement of need 
 
@@ -121,5 +123,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNTI5NjIwMzMsMTMyNzM2NjQzNl19
+eyJoaXN0b3J5IjpbNDQ1MjgyMTcyLDEzMjczNjY0MzZdfQ==
 -->
