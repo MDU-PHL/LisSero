@@ -16,7 +16,9 @@ authors:
   - name: Kristy A. Horan
     affiliation: 2
    - name:  William R. Pitchers
+     affiliation: 2
    - name: Karolina Mercoulia
+    affiliation: 2
    - name: Susan Ballard
    - name: Anders Gonçalves da Silva
    - name: Timothy P. Stinear
@@ -25,11 +27,11 @@ authors:
 affiliations:
  - name: Austin Health
    index: 1
- - name: Microbiological Diagnostic Unit Public Health Laboratory, Department of Microbiology and Immunology, The Doherty Institute for Infection and Immunity, The University of Melbour
+ - name: Microbiological Diagnostic Unit Public Health Laboratory, Department of Microbiology and Immunology, The Doherty Institute for Infection and Immunity, The University of Melbourne
    index: 2
- - name: Independent Researcher
+ - name: Department of Microbiology and Immunology, The Doherty Institute for Infection and Immunity, The University of Melbourne
    index: 3
-date: 13 August 2017
+date: 13 July 2020
 bibliography: paper.bib
 
 # Optional fields if submitting to a AAS journal too, see this blog post:
@@ -124,5 +126,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA1MjQzNzA4N119
+eyJoaXN0b3J5IjpbLTIxMTYxOTQ3MzFdfQ==
 -->
