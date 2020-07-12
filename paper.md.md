@@ -43,15 +43,9 @@ bibliography: paper.bib
 
 # Summary
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+One of the corner stones of transition to genomics in public health are Bioinformatic
+tools to assist in replicating wet lab processes using whole-genome sequence data. A 
+number of tools have been written to carry out 
 
 # Statement of need 
 
@@ -127,5 +121,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMTg2MzUzODUsMTMyNzM2NjQzNl19
+eyJoaXN0b3J5IjpbLTIwNTI5NjIwMzMsMTMyNzM2NjQzNl19
 -->
