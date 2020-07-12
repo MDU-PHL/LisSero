@@ -18,12 +18,17 @@ authors:
    - name:  William R. Pitchers
      affiliation: 2
    - name: Karolina Mercoulia
-    affiliation: 2
+     affiliation: 2
    - name: Susan Ballard
+     affiliation: 2
    - name: Anders Gonçalves da Silva
+      affiliation: 2
    - name: Timothy P. Stinear
+     affiliation: 3
    - name: Benjamin P. Howden
+     affiliation: 2, 3
    - name: Torsten Seemann
+     affiliation: 2, 3
 affiliations:
  - name: Austin Health
    index: 1
@@ -34,10 +39,6 @@ affiliations:
 date: 13 July 2020
 bibliography: paper.bib
 
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
 ---
 
 # Summary
@@ -126,5 +127,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMTYxOTQ3MzFdfQ==
+eyJoaXN0b3J5IjpbMTMyNzM2NjQzNl19
 -->
