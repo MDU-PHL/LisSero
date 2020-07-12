@@ -56,6 +56,10 @@ of whole-genome sequencing technology.
 
 # Statement of need 
 
+`LisSero` is a Python package that automates the process of `BLASTing`
+a set of contigs from a draft assembly of a *Listeria monocytogenes` genome
+against a curated set of five genes. The five genes ([])
+
 `Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
 flexibility or ease-of-use in the user-interface. The API for `Gala` was
@@ -128,5 +132,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMDI5MzQxNzYsMTMyNzM2NjQzNl19
+eyJoaXN0b3J5IjpbLTY3OTgzMTA5MywxMzI3MzY2NDM2XX0=
 -->
