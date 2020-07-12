@@ -48,7 +48,10 @@ tools to assist in replicating wet lab processes using whole-genome sequence dat
 number of tools have been written to carry out various bacterial sub-typing techniques, 
 such as multi-locus sequence typing, and various types of phenotypic serotype inferences
 (e.g., *Salmonella* serotyping, and *Neisseria gonorrhoeae* multi-antigen sequence typing). 
-Here we present **LisSero**, a tool for perform
+Here we present `LisSero`, a tool for performing *Listeria monocytogenes* *in silico* serotype
+inferences based on draft assemblies obtained from whole-genome sequence data.
+`LisSero` will add a valuable tool to the growing number of Bioinformatics tools
+designed to 
 
 # Statement of need 
 
@@ -124,5 +127,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA5MjI4ODcwMCwxMzI3MzY2NDM2XX0=
+eyJoaXN0b3J5IjpbLTE5OTg2NDg4MTksMTMyNzM2NjQzNl19
 -->
