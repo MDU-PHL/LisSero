@@ -16,11 +16,16 @@ authors:
   - name: Kristy A. Horan
     affiliation: 2
    - name:  William R. Pitchers
-   - name: Karolina Merculia
+   - name: Karolina Mercoulia
+   - name: Susan Ballard
+   - name: Anders Gonçalves da Silva
+   - name: Timothy P. Stinear
+   - name: Benjamin P. Howden
+   - name: Torsten Seemann
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
+ - name: Austin Health
    index: 1
- - name: Institution Name
+ - name: Microbiological Diagnostic Unit Public Health Laboratory, Department of Microbiology and Immunology, The Doherty Institute for Infection and Immunity, The University of Melbour
    index: 2
  - name: Independent Researcher
    index: 3
@@ -119,5 +124,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzA0MDA3NTNdfQ==
+eyJoaXN0b3J5IjpbMjA1MjQzNzA4N119
 -->
