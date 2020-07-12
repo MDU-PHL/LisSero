@@ -58,7 +58,8 @@ of whole-genome sequencing technology.
 
 `LisSero` is a Python package that automates the process of `BLASTing`
 a set of contigs from a draft assembly of a *Listeria monocytogenes* genome
-against a curated database of five genes. The five genes (NAME GENES) have been
+against a curated database of five genes. The serotype is assigned in accordance 
+with the combination of identified genes. The five genes (NAME GENES) have been
 described as the minimum necessary to classify *L. monocytogenes* isolates 
 into distinct serotypes of public health importance. 
 
@@ -134,5 +135,5 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyODMzNTQ1MywxMzI3MzY2NDM2XX0=
+eyJoaXN0b3J5IjpbLTI3ODQxNzgxOSwxMzI3MzY2NDM2XX0=
 -->
