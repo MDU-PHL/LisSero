@@ -1,12 +1,14 @@
 
 ---
 title: 'LisSero: *In silico* serotyping of *Listeria monocytogenes*'
+
 tags:
   - Python
   - bioinformatics
   - public health microbiology
   - microbial genomics
   - Listeria
+
 authors:
   - name: Jason Kwong^[Corresponding author]
     orcid: 0000-0003-0872-7098
@@ -29,6 +31,7 @@ authors:
      affiliation: "2, 3"
    - name: Torsten Seemann^[Corresponding author]
      affiliation: "2, 3"
+
 affiliations:
  - name: Austin Health
    index: 1
@@ -36,7 +39,9 @@ affiliations:
    index: 2
  - name: Department of Microbiology and Immunology, The Doherty Institute for Infection and Immunity, The University of Melbourne
    index: 3
+
 date: 13 July 2020
+
 bibliography: paper.bib
 
 ---
@@ -83,7 +88,7 @@ Services for funding towards our Transition to Genomics.
 
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOlsxMDU0MjE2NDY4LDY4MDQ0NDY2
-MCwtMTMzMjMyMzQ3OSwxOTYyODUzMzY2LDYyNjM0OTEzNCwyMT
-g1MzA2ODddfQ==
+BnZm1cbiIsImhpc3RvcnkiOlstMTA0OTE3ODI3NCwxMDU0MjE2
+NDY4LDY4MDQ0NDY2MCwtMTMzMjMyMzQ3OSwxOTYyODUzMzY2LD
+YyNjM0OTEzNCwyMTg1MzA2ODddfQ==
 -->
