@@ -86,18 +86,6 @@ For a quick reference, the following citation commands can be used:
 - `[@author:2001]` -> "(Author et al., 2001)"
 - `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
 
-# Figures
-
-Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Fenced code blocks are rendered with syntax highlighting:
-```python
-for n in range(10):
-    yield f(n)
-```	
-
 # Acknowledgements
 
 We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
@@ -105,9 +93,8 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 
 # References
 
-> Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOlstNDc1ODEzNDM1LC0xMzMyMzIz
-NDc5LDE5NjI4NTMzNjYsNjI2MzQ5MTM0LDIxODUzMDY4N119
+BnZm1cbiIsImhpc3RvcnkiOls2ODA0NDQ2NjAsLTEzMzIzMjM0
+NzksMTk2Mjg1MzM2Niw2MjYzNDkxMzQsMjE4NTMwNjg3XX0=
 -->
