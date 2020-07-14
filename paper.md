@@ -69,7 +69,8 @@ the capability of the tool to recover the expected serotype from draft assemblie
 of *L. monocytogenes*. The tool is important in providing backwards compatibility, 
 allowing researchers and public health labs wishing to move to WGS the ability to 
 compare their strains with previously available data. The tool is already use in routinely
-in our lab, and 
+in our lab, and it has already been used in a number of publications [@kwongProspectiveWholeGenomeSequencing2016, @toledoGenomicDiversityListeria2018, @bainesCompleteMicrobialGenomes2019a,
+@knijnAdvancedResearchInfrastructure2020].
 
 `Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
@@ -144,6 +145,6 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOlstMTMzMjMyMzQ3OSwxOTYyODUz
-MzY2LDYyNjM0OTEzNCwyMTg1MzA2ODddfQ==
+BnZm1cbiIsImhpc3RvcnkiOlstMTUwMjk5MzMzLC0xMzMyMzIz
+NDc5LDE5NjI4NTMzNjYsNjI2MzQ5MTM0LDIxODUzMDY4N119
 -->
