@@ -61,7 +61,7 @@ a set of contigs from a draft assembly of a *Listeria monocytogenes* genome
 against a curated database of five genes. The serotype is assigned in accordance 
 with the combination of identified genes. The five genes (NAME GENES) have been
 described as the minimum necessary to classify *L. monocytogenes* isolates 
-into distinct serotypes of public health importance.
+into distinct serotypes of public health importance .
 
 
 
@@ -138,6 +138,6 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOls2MjYzNDkxMzQsMjE4NTMwNjg3
-XX0=
+BnZm1cbiIsImhpc3RvcnkiOlsxOTYyODUzMzY2LDYyNjM0OTEz
+NCwyMTg1MzA2ODddfQ==
 -->
