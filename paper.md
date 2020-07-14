@@ -67,7 +67,9 @@ to classify *L. monocytogenes* isolates into distinct serotypes of public health
 based *L monocytogenes* serotyping. We provide validation data, and demonstrate
 the capability of the tool to recover the expected serotype from draft assemblies
 of *L. monocytogenes*. The tool is important in providing backwards compatibility, 
-allowing researchers and 
+allowing researchers and public health labs wishing to move to WGS the ability to 
+compare their strains with previously available data. The tool is already use in routinely
+in our lab, and 
 
 `Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
@@ -142,6 +144,6 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOlsyODQwOTgzOTQsMTk2Mjg1MzM2
-Niw2MjYzNDkxMzQsMjE4NTMwNjg3XX0=
+BnZm1cbiIsImhpc3RvcnkiOlstMTMzMjMyMzQ3OSwxOTYyODUz
+MzY2LDYyNjM0OTEzNCwyMTg1MzA2ODddfQ==
 -->
