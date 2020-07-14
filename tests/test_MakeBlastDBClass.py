@@ -5,6 +5,7 @@ from lissero.scripts.Blast import MakeBlastDB
 run_mkdb = MakeBlastDB()
 
 
-def test_makeblastdb_version():
+def test_makeblastdb_version(blast_version):
     run_mkdb.version()
-    assert ('2', '10', '0') == run_mkdb.version_no
+    expected = tuple(blast_version.split("."))
+    assert expected == run_mkdb.version_no
