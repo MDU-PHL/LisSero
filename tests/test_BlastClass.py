@@ -5,6 +5,8 @@ from lissero.scripts.Blast import Blast
 run_blast = Blast()
 
 
-def test_blast_version():
+def test_blast_version(blast_version):
+    print(f"Testing version {blast_version}")
     run_blast.version()
-    assert ('2', '10', '0') == run_blast.version_no
+    expected = tuple(blast_version.split("."))
+    assert expected == run_blast.version_no
