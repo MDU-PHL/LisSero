@@ -9,7 +9,7 @@ tags:
   - Listeria 
 authors:
   - name: Jason Kwong^[Corresponding author]
-    orcid: 0000-0003-0872-7098
+    orcid: XXX
     affiliation: "1, 2"
   - name: Josh Zhang
     affiliation: 2
@@ -83,7 +83,7 @@ Services for funding towards our Transition to Genomics.
 
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOlsxMDU0MjE2NDY4LDY4MDQ0NDY2
-MCwtMTMzMjMyMzQ3OSwxOTYyODUzMzY2LDYyNjM0OTEzNCwyMT
-g1MzA2ODddfQ==
+BnZm1cbiIsImhpc3RvcnkiOls2NDA3Mjg0NjksMTA1NDIxNjQ2
+OCw2ODA0NDQ2NjAsLTEzMzIzMjM0NzksMTk2Mjg1MzM2Niw2Mj
+YzNDkxMzQsMjE4NTMwNjg3XX0=
 -->
