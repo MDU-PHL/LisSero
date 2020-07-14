@@ -64,7 +64,10 @@ The five genes (NAME GENES) have been described as the minimum necessary
 to classify *L. monocytogenes* isolates into distinct serotypes of public health importance [@doumithDifferentiationMajorListeria2004].
 
 `LisSero` was designed to provide an *in silico* replacement for the muliplex PCR
-based *L monocytogenes* serotyping. We provide validation data, and demonstra
+based *L monocytogenes* serotyping. We provide validation data, and demonstrate
+the capability of the tool to recover the expected serotype from draft assemblies
+of *L. monocytogenes*. The tool is important in providing backwards compatibility, 
+allowing researchers and 
 
 `Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
@@ -139,6 +142,6 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOls0Njg1MTE5MTQsMTk2Mjg1MzM2
+BnZm1cbiIsImhpc3RvcnkiOlsyODQwOTgzOTQsMTk2Mjg1MzM2
 Niw2MjYzNDkxMzQsMjE4NTMwNjg3XX0=
 -->
