@@ -72,29 +72,18 @@ compare their strains with previously available data. The tool is already use in
 in our lab, and it has already been used in a number of publications [@kwongProspectiveWholeGenomeSequencing2016, @toledoGenomicDiversityListeria2018, @bainesCompleteMicrobialGenomes2019a,
 @knijnAdvancedResearchInfrastructure2020].
 
-# Citations
-
-Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
-
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
-
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)"
 
 # Acknowledgements
+We would like to acknowledge all the public health laboratories that provided validation data.
+We would like to acknowledge funding from the Victorian Department of Health and Human
+Services for funding towards our Transition to Genomics.
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
 
 # References
 
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOls2ODA0NDQ2NjAsLTEzMzIzMjM0
-NzksMTk2Mjg1MzM2Niw2MjYzNDkxMzQsMjE4NTMwNjg3XX0=
+BnZm1cbiIsImhpc3RvcnkiOlsxMDU0MjE2NDY4LDY4MDQ0NDY2
+MCwtMTMzMjMyMzQ3OSwxOTYyODUzMzY2LDYyNjM0OTEzNCwyMT
+g1MzA2ODddfQ==
 -->
