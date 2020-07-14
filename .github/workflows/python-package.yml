@@ -7,8 +7,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - '!paper.md'
-      - '!README.md'
+      - '**.py'
   pull_request:
     branches: [ master ]
 
