@@ -6,6 +6,9 @@ name: Python package
 on:
   push:
     branches: [ master ]
+    paths:
+      - '!paper.md'
+      - '!README.md'
   pull_request:
     branches: [ master ]
 
