@@ -60,11 +60,11 @@ of whole-genome sequencing technology.
 a set of contigs from a draft assembly of a *Listeria monocytogenes* genome
 against a curated database of five genes. The serotype is assigned in accordance 
 with the combination of identified genes [@doumithDifferentiationMajorListeria2004]. 
-The five genes (NAME GENES) have been
-described as the minimum necessary to classify *L. monocytogenes* isolates 
-into distinct serotypes of public health importance [@doumithDifferentiationMajorListeria2004].
+The five genes (NAME GENES) have been described as the minimum necessary 
+to classify *L. monocytogenes* isolates into distinct serotypes of public health importance [@doumithDifferentiationMajorListeria2004].
 
-`LisSero` 
+`LisSero` was designed to provide an *in silico* replacement for the muliplex PCR
+based *L monocytogenes* serotyping. We provide validation data, and demonstra
 
 `Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
@@ -139,6 +139,6 @@ Oh, and support from Kathryn Johnston during the genesis of this project.
 > Written with [StackEdit](https://stackedit.io/).
 <!--stackedit_data:
 eyJwcm9wZXJ0aWVzIjoiZXh0ZW5zaW9uczpcbiAgcHJlc2V0Oi
-BnZm1cbiIsImhpc3RvcnkiOlstMTIzNzMzMTY1MywxOTYyODUz
-MzY2LDYyNjM0OTEzNCwyMTg1MzA2ODddfQ==
+BnZm1cbiIsImhpc3RvcnkiOls0Njg1MTE5MTQsMTk2Mjg1MzM2
+Niw2MjYzNDkxMzQsMjE4NTMwNjg3XX0=
 -->
