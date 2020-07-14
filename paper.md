@@ -6,7 +6,7 @@ tags:
   - bioinformatics
   - public health microbiology
   - microbial genomics
-  - Listeria
+  - Listeria 
 authors:
   - name: Jason Kwong^[Corresponding author]
     orcid: 0000-0003-0872-7098
@@ -15,20 +15,20 @@ authors:
     affiliation: 2
   - name: Kristy A. Horan
     affiliation: 2
-   - name:  William R. Pitchers
-     affiliation: 2
-   - name: Karolina Mercoulia
-     affiliation: 2
-   - name: Susan Ballard
-     affiliation: 2
-   - name: Anders Gonçalves da Silva
-      affiliation: 2
-   - name: Timothy P. Stinear
-     affiliation: 3
-   - name: Benjamin P. Howden
-     affiliation: "2, 3"
-   - name: Torsten Seemann^[Corresponding author]
-     affiliation: "2, 3"
+  - name:  William R. Pitchers
+    affiliation: 2
+  - name: Karolina Mercoulia
+    affiliation: 2
+  - name: Susan Ballard
+    affiliation: 2
+  - name: Anders Gonçalves da Silva
+    affiliation: 2
+  - name: Timothy P. Stinear
+    affiliation: 3
+  - name: Benjamin P. Howden
+    affiliation: "2, 3"
+  - name: Torsten Seemann^[Corresponding author]
+    affiliation: "2, 3"
 affiliations:
  - name: Austin Health
    index: 1
