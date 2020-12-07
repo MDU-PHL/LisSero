@@ -44,7 +44,7 @@ setup(
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description="MDU Listeria Serotyping",  # Optional
+    description="In silico serotyping of Listeria monocytogenes",  # Optional
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.
     #
@@ -101,6 +101,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9"
     ],
     # This field adds keywords for your project which will appear on the
     # project page. What does your project relate to?
