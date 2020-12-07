@@ -12,8 +12,9 @@ on:
     branches: [ master ]
   workflow_dispatch:
     branches: [ master ]
-    tags:
-      description: "Testing workflow"
+    inputs:
+      tags:
+        description: "Testing workflow"
 
 jobs:
   test:
