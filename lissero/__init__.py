@@ -2,4 +2,4 @@
 A tool to perform Listeria Serotyping and Binary Typing
 """
 
-__version__ = "0.4.3"
+__version__ = "0.4.4"
