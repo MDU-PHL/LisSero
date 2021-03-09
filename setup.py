@@ -131,10 +131,10 @@ setup(
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=[
-        "biopython==1.77",
-        "click==7.1.2",
-        "loguru==0.5.1",
-        "numpy==1.19.0",
+        "biopython>=1.77",
+        "click>=7.1.2",
+        "loguru>=0.5.1",
+        "numpy>=1.19.0",
     ],  # Optional
     # List additional groups of dependencies here (e.g. development
     # dependencies). Users will be able to install these using the "extras"
