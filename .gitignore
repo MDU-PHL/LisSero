@@ -5,3 +5,4 @@ make_rst.sh
 build
 dist
 .idea
+*.log
