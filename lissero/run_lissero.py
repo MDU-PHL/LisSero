@@ -7,6 +7,7 @@ import os
 
 import click
 import loguru
+import pkg_resources
 from Bio import SeqIO
 
 from lissero.scripts.Sample import Samples
@@ -15,6 +16,8 @@ from lissero.scripts.Serotype import SerotypeDB
 from .__init__ import __version__ as version
 
 logger = loguru.logger
+
+DEFAULT_DB = pkg_resources.resource_filename("lissero", "db")
 
 
 def print_version(ctx, param, value):
@@ -53,7 +56,7 @@ def is_fasta(filename):
 
 @click.command()
 @click.help_option("-h", "--help")
-@click.option("-s", "--serotype_db", default=None, envvar="LISSERO_DB")
+@click.option("-s", "--serotype_db", default=DEFAULT_DB, envvar="LISSERO_DB", show_default=True)
 @click.option(
     "--min_id",
     default=95.0,
@@ -102,12 +105,10 @@ def run_lissero(serotype_db, min_id, min_cov, debug, logfile, fasta):
                      "valid FASTA.")
         sys.exit(1)
 
-    # fix issue #11 and #12
-    path_serodb = ""
     try:
         path_serodb = os.path.realpath(serotype_db)
     except TypeError as e:
-        logger.error(f"Please provide a correct serotype db path or set correct PATH for LISSERO_DB")
+        logger.error(f"Please provide a valid path for serotype db path or set correct PATH for LISSERO_DB")
         sys.exit(1)
     sero_db = SerotypeDB(path_db=path_serodb, db_type="serotype")
     sero_db.check_db()
