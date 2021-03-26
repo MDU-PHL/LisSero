@@ -1,0 +1,10 @@
+{
+    "date_created": "2020-06-04T11:57:55.145347",
+    "cmd": "/usr/local/bin/makeblastdb -dbtype nucl -in /Users/andersgs/dev/mdu-phl/LisSero/lissero/db/sequences.fasta -parse_seqids -input_type fasta -out /Users/andersgs/dev/mdu-phl/LisSero/lissero/db/lissero -title 'Listeria Serotyping BLAST DB'",
+    "creator": "andersgs",
+    "infile": {
+        "path": "/Users/andersgs/dev/mdu-phl/LisSero/lissero/db/sequences.fasta",
+        "sha256": "ee6c3b3ec03d2d065bac13304b0258c0b31ab763365d4bdfee8d2501567f0def"
+    },
+    "title": "Listeria Serotyping BLAST DB"
+}
