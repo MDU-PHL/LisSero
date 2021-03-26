@@ -5,14 +5,3 @@ make_rst.sh
 build
 dist
 .idea
-*nhr
-*nin
-*nog
-*nos
-*not
-*ndb
-*nsq
-*ntf
-*nto
-*.log
-lissero_db.json
