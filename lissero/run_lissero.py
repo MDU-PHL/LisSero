@@ -52,6 +52,7 @@ def is_fasta(filename):
         sys.exit(1)
 
 @click.command()
+@click.help_option("-h", "--help")
 @click.option("-s", "--serotype_db", default=None, envvar="LISSERO_DB")
 @click.option(
     "--min_id",
