@@ -6,6 +6,7 @@ import subprocess
 import shutil
 import os
 import re
+import sys
 
 from loguru import logger
 
@@ -47,14 +48,14 @@ class SubRunner:
         self.cmd_list = [self.cmd_path]
         return major, minor, patch
 
-    def is_version(self, requirement):
+    def is_version(self):
         try:
-            major, minor, path = map(self.version(), int)
+            major, minor, path = map(int, self.version())
             if major == 2 and minor >=9:
                 return True
             else:
                 logger.critical(f"lissero requires blast version higher than 2.9.0")
-                raise SystemError
+                return False
         except:
             logger.critical(
                 f"Something went wrong when parsing the version" f" for {self.cmd}"
