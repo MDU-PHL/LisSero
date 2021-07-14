@@ -17,14 +17,14 @@
 ## Dependencies
 
 *   [Python 3.6+](https://www.python.org/downloads/)
-*   [BLAST 2.10.0](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
+*   [BLAST 2.10.0+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
 
 ## Installation
 
     pip3 install lissero
 
 
-### Installing BLAST 2.10.0
+### Installing BLAST 2.10.0+
 
 **Brew**:
 
@@ -32,7 +32,7 @@
 
 **Conda**:
 
-    conda install -c bioconda blast 
+    conda install -c bioconda blast=2.10.1
 
 ## *In silico* serogrouping for *Listeria monocytogenes*
 
