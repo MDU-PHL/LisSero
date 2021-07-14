@@ -5,6 +5,7 @@ All Serotyping logic stays here.
 """
 
 import os
+import sys
 import json
 import datetime
 import getpass
@@ -88,6 +89,8 @@ class Typing:
         self.db_version = db.version
         path_db = os.path.realpath(db.db_name)
         self.blast = copy.deepcopy(blast_run)
+        if not self.blast.is_version():
+            sys.exit()
         self.blast.add_db(path_db)
         self.blast.add_option("-ungapped")
         self.blast.add_option("-culling_limit", 1)
@@ -112,6 +115,10 @@ class Typing:
         logger.info(self.blast_res.stdout.strip())
         blast_matches = self.blast_res.stdout.strip().split("\n")
         for b in blast_matches:
+            info = b.split("\t")
+            if len(info) < 5:
+                logger.critical(f"The specie of the sample may not be listeria")
+                sys.exit()
             (qaccver, saccver, length, slen, pident) = b.split("\t")
             if (
                 float(pident) >= self.pid
@@ -199,6 +206,10 @@ class Serotype(Typing):
         self.partial_matches = set()
         blast_matches = self.blast_res.stdout.strip().split("\n")
         for b in blast_matches:
+            info = b.split("\t")
+            if len(info) < 5:
+                logger.critical(f"The specie of the sample may not be listeria")
+                sys.exit()
             (qaccver, saccver, length, slen, pident) = b.split("\t")
             obs_pid = float(pident)
             obs_cov = 100 * (float(length) / float(slen))
