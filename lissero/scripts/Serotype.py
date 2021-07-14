@@ -104,7 +104,8 @@ class Typing:
         return string
 
     def _blast_run(self):
-        self.blast_res = self.blast.run()
+        if self.blast.is_version():
+            self.blast_res = self.blast.run()
 
     def _blast_parse(self):
         self.full_matches = set()
@@ -112,6 +113,10 @@ class Typing:
         logger.info(self.blast_res.stdout.strip())
         blast_matches = self.blast_res.stdout.strip().split("\n")
         for b in blast_matches:
+            info = b.split("\t")
+            if len(info) < 5:
+                logger.critical(f"The specie of the sample may not be listeria")
+                raise SystemError
             (qaccver, saccver, length, slen, pident) = b.split("\t")
             if (
                 float(pident) >= self.pid
