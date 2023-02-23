@@ -7,12 +7,14 @@ import os
 
 import click
 import loguru
+import FastaValidator
 import pkg_resources
 from Bio import SeqIO
 
 from lissero.scripts.Sample import Samples
 from lissero.scripts.Blast import Blast
 from lissero.scripts.Serotype import SerotypeDB
+from lissero.exceptions import InvalidFASTAFormat, InvalidFASTADuplicateIdentifiers, InvalidFASTAEmptyFile, InvalidFASTAInvalidCharacters
 from .__init__ import __version__ as version
 
 logger = loguru.logger
@@ -26,33 +28,27 @@ def print_version(ctx, param, value):
     click.echo(f"LisSero {version}")
     ctx.exit()
 
-
-def is_fasta(filename):
+def is_fasta(fna):
     """
-    There are no real FASTA validators out there.
-    This is the best I could come up with. If the
-    file is empty or does not contain any FASTA records
-    the parser will return an empty generator which will
-    return a StopIteration exception when running `next(gen)`.
-    But, there is another case where the file starts with
-    a `>`, and thus the generator works, but it returns an
-    empty record, thus the `len(rec)) > 0.
-
-    Args:
-        filename: FASTA input name
-
-    Returns:
-        boolean: true if it looks like a FASTA false otherwise.
+    Check if a file is a valid FASTA file
+    :param fna: path to file
+    :return: True if valid FASTA, False if not
     """
-    gen = SeqIO.parse(filename, "fasta")
-    try:
-        rec = next(gen)
-        return len(rec) > 0
-    except StopIteration:
+    # check if file is empty
+    if os.stat(fna).st_size == 0:
+        raise InvalidFASTAEmptyFile(f"{fna} is an empty file")
+    return_code = FastaValidator.fasta_validator(fna)
+    if return_code == 0:
+        return True
+    elif return_code == 1:
+        raise InvalidFASTAFormat(f"{fna} is not a valid FASTA file")
+    elif return_code == 2:
+        raise InvalidFASTADuplicateIdentifiers(f"{fna} contains duplicate identifiers")
+    elif return_code == 4:
+        return InvalidFASTAInvalidCharacters(f"{fna} contains invalid characters")
+    else:
         return False
-    except Exception as e:
-        logger.error(e)
-        sys.exit(1)
+
 
 @click.command()
 @click.help_option("-h", "--help")
