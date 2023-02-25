@@ -1,14 +1,16 @@
-#!/usr/bin/env python
-# Script by Jason Kwong
-# In silico serotyping for L.monocytogenes
+"""
+LisSero: an in silico serogroup prediction tool for Listeria monocytogenes
+"""
 import sys
 import logging
 import os
+import gzip
+import bz2
 
 import click
 import loguru
 import FastaValidator
-import pkg_resources
+import rezzie
 from Bio import SeqIO
 
 from lissero.scripts.Sample import Samples
@@ -19,10 +21,11 @@ from .__init__ import __version__ as version
 
 logger = loguru.logger
 
-DEFAULT_DB = pkg_resources.resource_filename("lissero", "db")
+DEFAULT_DB = rezzie.get_path("lissero", "db")
 
 
-def print_version(ctx, param, value):
+def print_version(ctx, _, value):
+    """Print lissero version and exit."""
     if not value or ctx.resilient_parsing:
         return
     click.echo(f"LisSero {version}")
@@ -37,8 +40,10 @@ def is_fasta(fna):
     # check if file is empty
     if os.stat(fna).st_size == 0:
         raise InvalidFASTAEmptyFile(f"{fna} is an empty file")
-    return_code = FastaValidator.fasta_validator(fna)
+    # pylint: disable=c-extension-no-member
+    return_code = FastaValidator.fasta_validator(fna) 
     if return_code == 0:
+        logger.info(f"{fna} is a valid FASTA file")
         return True
     elif return_code == 1:
         raise InvalidFASTAFormat(f"{fna} is not a valid FASTA file")
@@ -48,6 +53,9 @@ def is_fasta(fna):
         return InvalidFASTAInvalidCharacters(f"{fna} contains invalid characters")
     else:
         return False
+
+
+
 
 
 @click.command()
@@ -100,11 +108,13 @@ def run_lissero(serotype_db, min_id, min_cov, debug, logfile, fasta):
         logger.error("One or more input files do not appear to be "
                      "valid FASTA.")
         sys.exit(1)
+    else:
+        logger.info("All input files appear to be valid FASTA.")
 
     try:
         path_serodb = os.path.realpath(serotype_db)
-    except TypeError as e:
-        logger.error(f"Please provide a valid path for serotype db path or set correct PATH for LISSERO_DB")
+    except TypeError:
+        logger.error("Please provide a valid path for serotype db path or set correct PATH for LISSERO_DB")
         sys.exit(1)
     sero_db = SerotypeDB(path_db=path_serodb, db_type="serotype")
     sero_db.check_db()
@@ -117,4 +127,5 @@ def run_lissero(serotype_db, min_id, min_cov, debug, logfile, fasta):
 
 
 if __name__ == "__main__":
+    # pylint: disable=no-value-for-parameter
     run_lissero()
