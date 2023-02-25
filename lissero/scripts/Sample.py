@@ -22,9 +22,6 @@ class Sample:
         self.filename = os.path.realpath(filename)
         self.serotype = Serotype(blast, sero_db, pid=sg_min_id, cov=sg_min_cov)
 
-    def is_fasta(self):
-        pass
-
     def get_serotype(self):
         logger.info(f"Serotyping: {self.id}")
         self.serotype.generate_type(self.filename)
