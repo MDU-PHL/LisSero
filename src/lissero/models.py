@@ -2,7 +2,6 @@
 This module contains the serotyping functions and data models
 """
 
-import subprocess
 from dataclasses import dataclass
 from enum import Enum
 from typing import Optional
@@ -77,61 +76,3 @@ class Serotype:
     blast_results: BlastHit
     serotype: Optional[Serogroup] = None
     comment: Optional[Comment] = None
-
-
-# Functions
-
-
-def open_fasta(fna):
-    """
-    Using the first 2 bytes of a file, determine if it is compressed or not with
-    gzip or bzip2 or not, and return the appropriate file handle.
-    """
-    with open(fna, "rb") as f:
-        magic = f.read(2)
-        if magic == b"\x1f\x8b":
-            return gzip.open(fna, "rt")
-        elif magic == b"\x42\x5a":
-            return bz2.open(fna, "rt")
-        else:
-            return open(fna, "rt", encoding="utf-8")
-
-
-def run_blast(fna, db, blastn_path):
-    """
-    Given a fasta file and a blast database, run the blastn command and 
-    return the results.
-    First, must check if the fasta file is compressed or not .
-    If compressed, created a tempfolder, and decompress the fasta file into it.
-    Then, run the blast command.
-    The blast command should look like this:
-    /usr/local/bin/blastn -db /Users/andersgs/dev/mdu-phl/LisSero/lissero/db/lissero -ungapped -culling_limit 1 \
-        -outfmt 6 qaccver saccver length slen pident -dust no \
-            -query /Users/andersgs/dev/mdu-phl/LisSero/tests/test_seq/NC_018591.fna.gz
-    This command should be able to run in concurrently with other blast commands
-    """
-    # Check if the fasta file is compressed or not
-    with open_fasta(fna) as f:
-        # Run the blast command
-        blast_cmd = [
-            blastn_path,
-            "-db",
-            db,
-            "-ungapped",
-            "-culling_limit",
-            "1",
-            "-outfmt",
-            "6 qaccver saccver length slen pident",
-            "-dust",
-            "no",
-            "-query",
-            fna,
-        ]
-        blast_results = subprocess.run(
-            blast_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
-        )
-        if blast_results.returncode != 0:
-            logger.critical(f"Error running blastn: {blast_results.stderr}")
-            raise RuntimeError
-        else:
-            return blast_results.stdout.decode("utf-8")
