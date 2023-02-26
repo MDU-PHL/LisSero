@@ -40,6 +40,9 @@ changelog = "https://github.com/MDU-PHL/lissero/blob/main/CHANGELOG.md"
 test = ["pytest"]
 dev = ["black", "build", "pytest", "isort", "pylint", "twine"]
 
+[project.scripts]
+lissero = "lissero.__main__:main"
+
 [tool.setuptools]
 include-package-data = true
 
