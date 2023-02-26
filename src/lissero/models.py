@@ -9,10 +9,12 @@ from typing import Optional
 
 # Data models
 
+
 class Result(Enum):
     """
     An enum to represent the results of a serotype
     """
+
     FULL = 1
     PARTIAL = 2
     NONE = 3
@@ -22,15 +24,18 @@ class Comment(Enum):
     """
     An enum to represent the comments for a serotype
     """
+
     NONE = 1
     NO_PRS = 2
     NO_SEROTYPE = 3
     UNUSUAL_4B = 4
 
+
 class Serogroup(Enum):
     """
     An enum to represent the serogroups
     """
+
     ONE_TWO_A = 1
     ONE_TWO_B = 2
     ONE_TWO_C = 3
@@ -42,11 +47,13 @@ class Serogroup(Enum):
     FOUR_E = 9
     SEVEN = 10
 
+
 @dataclass
 class BlastHit:
     """
     A model to contain the blast hits for a sample
     """
+
     prs: Result
     lmo0737: Result
     lmo1118: Result
@@ -59,6 +66,7 @@ class Serotype:
     """
     A model to contain the serotype information for the a sample
     """
+
     sample_id: str
     fasta_file: str
     prs: bool
@@ -73,6 +81,7 @@ class Serotype:
 
 # Functions
 
+
 def open_fasta(fna):
     """
     Using the first 2 bytes of a file, determine if it is compressed or not with
@@ -86,6 +95,7 @@ def open_fasta(fna):
             return bz2.open(fna, "rt")
         else:
             return open(fna, "rt", encoding="utf-8")
+
 
 def run_blast(fna, db, blastn_path):
     """
@@ -117,7 +127,9 @@ def run_blast(fna, db, blastn_path):
             "-query",
             fna,
         ]
-        blast_results = subprocess.run(blast_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        blast_results = subprocess.run(
+            blast_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
         if blast_results.returncode != 0:
             logger.critical(f"Error running blastn: {blast_results.stderr}")
             raise RuntimeError
