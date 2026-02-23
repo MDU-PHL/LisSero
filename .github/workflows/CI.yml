@@ -53,7 +53,7 @@ jobs:
         run: |
           mamba create -n lissero -c bioconda blast
           conda activate lissero
-          mlst --version
+          lissero --version
           # install flake8 and pytest for testing/linting
           conda install -y flake8 pytest pytest-cov
 
