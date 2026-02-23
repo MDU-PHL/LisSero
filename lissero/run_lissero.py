@@ -16,7 +16,7 @@ from .__init__ import __version__ as version
 
 logger = loguru.logger
 
-DEFAULT_DB = os.path.join(os.path.dirname(__file__),  'lissero', 'db')
+DEFAULT_DB = os.path.join(os.path.dirname(__file__),  'db')
 
 
 def print_version(ctx, param, value):

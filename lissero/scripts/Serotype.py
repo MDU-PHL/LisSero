@@ -244,11 +244,13 @@ class SerotypeDB:
         self.mkdb = MakeBlastDB(makeblastdb_path=makeblastdb_path)
         if db_type == "serotype":
             self.infile = os.path.join(pathlib.Path(__file__).parent.parent, SEROTYPE_FASTA)
+            
         else:
             logger.critical(f"I don't understand db_type = {db_type}")
             raise IOError
         self.force = force
         self.log_file = os.path.join(self.path_db, db_name + "_db.json")
+
         self.db_log = {}
 
     def check_db(self):
