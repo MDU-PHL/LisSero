@@ -61,7 +61,7 @@ jobs:
       - name: Install the current package
         shell: bash -el {0}
         run: |
-          conda activate ngmaster
+          conda activate lissero
           pip install .
           echo "Installed package version:"
           lissero --version
