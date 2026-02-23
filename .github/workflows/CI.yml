@@ -51,7 +51,7 @@ jobs:
       - name: Create Conda environment with blast
         shell: bash -el {0}
         run: |
-          mamba create -n lissero -c bioconda blast
+          mamba create -n lissero -c bioconda blast loguru python=${{ matrix.python-version }}
           conda activate lissero
           blastn -version
           # install flake8 and pytest for testing/linting
