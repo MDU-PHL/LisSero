@@ -7,7 +7,6 @@ import os
 
 import click
 import loguru
-import pkg_resources
 from Bio import SeqIO
 
 from lissero.scripts.Sample import Samples
@@ -17,7 +16,7 @@ from .__init__ import __version__ as version
 
 logger = loguru.logger
 
-DEFAULT_DB = pkg_resources.resource_filename("lissero", "db")
+DEFAULT_DB = os.path.join(os.path.dirname(__file__),  'lissero', 'db')
 
 
 def print_version(ctx, param, value):

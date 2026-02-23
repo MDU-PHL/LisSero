@@ -11,7 +11,8 @@ import getpass
 import hashlib
 import shlex
 import copy
-import pkg_resources
+import pathlib
+
 
 from loguru import logger
 
@@ -242,7 +243,7 @@ class SerotypeDB:
         self.db_name = os.path.join(self.path_db, db_name)
         self.mkdb = MakeBlastDB(makeblastdb_path=makeblastdb_path)
         if db_type == "serotype":
-            self.infile = pkg_resources.resource_filename("lissero", SEROTYPE_FASTA)
+            self.infile = os.path.join(pathlib.Path(__file__).parent.parent, SEROTYPE_FASTA)
         else:
             logger.critical(f"I don't understand db_type = {db_type}")
             raise IOError

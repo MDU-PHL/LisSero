@@ -76,8 +76,8 @@ setup(
     # This should be a valid email address corresponding to the author listed
     # above.
     author_email="kwongj@gmail.com",  # Optional
-    maintainer="Josh Zhang",
-    maintainer_email="josh.zhang@unimelb.edu.au",
+    maintainer="Kristy Horan",
+    maintainer_email="kristyhoran15@gmail.com",
     # Classifiers help users find your project by categorizing it.
     #
     # For a list of valid classifiers, see https://pypi.org/classifiers/
@@ -123,7 +123,7 @@ setup(
     # and refuse to install the project if the version does not match. If you
     # do not support Python 2, you can simplify this to '>=3.5' or similar, see
     # https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
-    python_requires=">=3.6, <4",
+    python_requires=">=3.12, <4",
     # This field lists other packages that your project depends on to run.
     # Any package you put here will be installed by pip when your project is
     # installed, so they must be valid existing projects.

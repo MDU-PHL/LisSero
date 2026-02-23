@@ -12,11 +12,11 @@
 
 ## Maintainers
 
-* MDU PHL - Josh Zhang, Kristy Horan, and Anders Gonçalves da Silva
+* MDU PHL - Kristy Horan, Torsten Seemann
 
 ## Dependencies
 
-*   [Python 3.6+](https://www.python.org/downloads/)
+*   [Python 3.12+](https://www.python.org/downloads/)
 *   [BLAST 2.10.0+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
 
 ## Installation
