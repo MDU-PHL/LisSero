@@ -1,8 +1,11 @@
 # LisSero
+[![Conda Downloads](https://img.shields.io/conda/dn/bioconda/lissero)](https://anaconda.org/bioconda/lissero)
+![Python](https://img.shields.io/badge/python-3.12-blue.svg)
+[![Tests](https://github.com/MDU-PHL/LisSero/actions/workflows/CI.yml/badge.svg)](https://github.com/MDU-PHL/LisSero/actions/workflows/CI.yml)
+
 
 *In silico* serogroup typing prediction for *Listeria monocytogenes*
 
-![PyPI](https://img.shields.io/pypi/v/lissero?style=flat-square) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/lissero?style=flat-square) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/lissero?style=flat-square)
 
 ## Authors
 
