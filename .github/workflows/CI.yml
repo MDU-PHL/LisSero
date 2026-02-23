@@ -1,0 +1,85 @@
+name: Tests
+
+on:
+    push:
+      tags:
+        - v*
+      branches:
+        - 'master'
+        - 'main'
+    pull_request:
+      branches: [ master ]
+    workflow_dispatch:
+      inputs:
+        tags:
+          description: "CI"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      # checkout the repository
+      - name: Checkout current code
+        uses: actions/checkout@v4
+
+      # Cache conda packages
+      - name: Cache conda packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.conda/pkgs
+            /usr/share/miniconda3/pkgs
+          key: ${{ runner.os }}-conda-${{ matrix.python-version }}-${{ hashFiles('**/environment.yml', '**/setup.py') }}
+          restore-keys: |
+            ${{ runner.os }}-conda-${{ matrix.python-version }}-
+
+      # Set up conda with mamba (using miniforge3)
+      - name: Set up Conda with Mamba
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-variant: Miniforge3
+          miniforge-version: latest
+          use-mamba: true
+          activate-environment: test
+          python-version: ${{ matrix.python-version }}
+
+      # Create conda environment using mamba
+      - name: Create Conda environment with mlst
+        shell: bash -el {0}
+        run: |
+          mamba create -n lissero -c bioconda blast
+          conda activate lissero
+          mlst --version
+          # install flake8 and pytest for testing/linting
+          conda install -y flake8 pytest pytest-cov
+
+      # Install the current package
+      - name: Install the current package
+        shell: bash -el {0}
+        run: |
+          conda activate ngmaster
+          pip install .
+          echo "Installed package version:"
+          lissero --version
+
+      # test the package
+      - name: Test the package
+        shell: bash -l {0}
+        run: |
+          set -euo pipefail
+          conda activate lissero
+          lissero lissero/test_data/*
+
+      # lint with flake8
+      - name: Lint with flake8
+        shell: bash -l {0}
+        run: |
+          conda activate lissero
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
