@@ -1,0 +1,33 @@
+### Commented entries have reasonable defaults.
+### Uncomment to edit them.
+Source: lissero
+Section: misc
+Priority: optional
+Homepage: https://github.com/MDU-PHL/LisSero
+Standards-Version: 3.9.2
+
+Package: lissero
+Version: 0.1
+Maintainer: Redmar van den Berg <redmar@ubuntu.com>
+# Pre-Depends: <comma-separated list of packages>
+Depends: python, emboss
+# Recommends: <comma-separated list of packages>
+# Suggests: <comma-separated list of packages>
+# Provides: <comma-separated list of packages>
+# Replaces: <comma-separated list of packages>
+Architecture: all
+# Multi-Arch: <one of: foreign|same|allowed>
+# Copyright: <copyright file; defaults to GPL2>
+# Changelog: <changelog file; defaults to a generic changelog>
+# Readme: <README.Debian file; defaults to a generic one>
+# Extra-Files: <comma-separated list of additional files for the doc directory>
+Files: bin/LisSero.py /usr/share/lissero
+ db/primers.tab /usr/share/lissero
+ db/serotypes.tab /usr/share/lissero
+
+File: /usr/bin/lissero 755
+ #!/bin/sh
+
+ python /usr/share/lissero/bin/LisSero.py $@
+
+Description: LisSero: In silico serogroup prediction for Listeria monocytogenes
