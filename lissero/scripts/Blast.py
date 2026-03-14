@@ -6,6 +6,7 @@ import subprocess
 import shutil
 import os
 import re
+import sys
 
 from loguru import logger
 
@@ -34,6 +35,7 @@ class SubRunner:
     def version(self):
         self.add_option("-version")
         res = self.run()
+        major, minor, patch = ["0", "0", "0"]
         try:
             self.version_no = self.version_pat.findall(res.stdout)[0]
             major, minor, patch = self.version_no
@@ -44,9 +46,21 @@ class SubRunner:
             raise SystemError
         logger.info(f"Found {self.cmd} version {major}.{minor}.{patch}")
         self.cmd_list = [self.cmd_path]
+        return major, minor, patch
 
-    def is_version(self, requirement):
-        pass
+    def is_version(self):
+        try:
+            major, minor, path = map(int, self.version())
+            if major == 2 and minor >=9:
+                return True
+            else:
+                logger.critical(f"lissero requires blast version higher than 2.9.0")
+                return False
+        except:
+            logger.critical(
+                f"Something went wrong when parsing the version" f" for {self.cmd}"
+            )
+            raise SystemError
 
     def run(self, stdout=subprocess.PIPE, stderr=subprocess.PIPE, retcode=0):
         logger.info("Blastn is running: " + ' '.join(self.cmd_list))
